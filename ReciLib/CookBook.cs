@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ReciLib
+{
+    class Cookbook
+    {
+        public string Name;
+        private readonly List<Recipe> Recipies = new List<Recipe>();
+
+        public Recipe GetRecipe(string name)
+        {
+            foreach(Recipe recipe in Recipies)
+            {
+                if(name == recipe.Name)
+                {
+                    return recipe;
+                }
+            }
+            return null;
+        }
+
+        public void CreateRecipe(string name, List<Ingredient> ingredients, string instructions)
+        {
+            Recipe recipe = new Recipe(name, instructions, ingredients);
+            Recipies.Add(recipe);
+        }
+    }
+}
