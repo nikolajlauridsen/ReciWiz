@@ -8,11 +8,11 @@ namespace ReciLib
 {
     public class CookbookRepo
     {
-        private readonly List<Cookbook> books = new List<Cookbook>();
+        private readonly List<Cookbook> Books = new List<Cookbook>();
 
         public Cookbook GetBook(string name)
         {
-            foreach(Cookbook book in books)
+            foreach(Cookbook book in Books)
             {
                 if(book.Name == name)
                 {
@@ -20,6 +20,12 @@ namespace ReciLib
                 }
             }
             return null;
+        }
+
+        public void CreateCookBook(string name)
+        {
+            Cookbook book = new Cookbook(name);
+            Books.Add(book);
         }
     }
 }

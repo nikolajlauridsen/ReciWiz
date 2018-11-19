@@ -12,7 +12,7 @@ namespace ReciWiz
 
         public void Run()
         {
-
+            Control.CreateNewRecipe();
         }
     }
 }
