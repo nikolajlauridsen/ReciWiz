@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReciLib
 {
-    class Recipe
+    public class Recipe
     {
         public string Name;
         public string Instructions;

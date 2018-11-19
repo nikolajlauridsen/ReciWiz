@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReciLib
 {
-    class CookbookRepo
+    public class CookbookRepo
     {
         private readonly List<Cookbook> books = new List<Cookbook>();
 
