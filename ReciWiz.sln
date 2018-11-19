@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciWiz", "ReciWiz\ReciWiz.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciLib", "ReciLib\ReciLib.csproj", "{60E5980A-7C14-4CBB-9EDF-EEE556031033}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciTest", "ReciTest\ReciTest.csproj", "{0434134A-8810-413C-ACA3-CDE1369C8D40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{60E5980A-7C14-4CBB-9EDF-EEE556031033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E5980A-7C14-4CBB-9EDF-EEE556031033}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60E5980A-7C14-4CBB-9EDF-EEE556031033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
