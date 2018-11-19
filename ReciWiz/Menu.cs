@@ -12,7 +12,28 @@ namespace ReciWiz
 
         public void Run()
         {
-            Control.CreateNewRecipe();
+            bool menuRunning = true;
+            while (menuRunning)
+            {
+                Console.Clear();
+                Console.WriteLine("Menu:");
+                Console.WriteLine("1. Create recipe\n2. View Recipe\n");
+                Console.Write("Input: ");
+                string uinput = Console.ReadLine();
+                switch (uinput)
+                {
+                    case "1":
+                        Control.CreateNewRecipe();
+                        break;
+                    case "2":
+                        Control.ShowRecipe();
+                        break;
+                    default:
+                        menuRunning = false;
+                        break;
+                }
+            }
         }
+
     }
 }

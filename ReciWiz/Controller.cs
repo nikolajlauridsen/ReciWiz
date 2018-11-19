@@ -18,6 +18,7 @@ namespace ReciWiz
 
         public void CreateNewRecipe()
         {
+            Console.Clear();
             Console.Write("Cookbook name: ");
             Cookbook book = Repo.GetBook(Console.ReadLine());
             if (book is null)
@@ -56,6 +57,31 @@ namespace ReciWiz
             Recipe recipe = new Recipe(name, instructions, ingredientList);
             book.AddRecipe(recipe);
             Console.WriteLine("Recipe added");
+        }
+
+        public void ShowRecipe()
+        {
+            Console.Clear();
+            Console.Write("Cookbook: ");
+            Cookbook book = Repo.GetBook(Console.ReadLine());
+            Console.Write("Recipe name: ");
+            Recipe recipe = book.GetRecipe(Console.ReadLine());
+            Console.Clear();
+
+            if (book != null)
+            {
+                Console.WriteLine(recipe.Name);
+                Console.WriteLine("\nIngredients:");
+                foreach (Ingredient ingredient in recipe.Ingredients)
+                {
+                    Console.WriteLine(String.Format("{0} {1} {2}", ingredient.Quantity, ingredient.Unit, ingredient.Name));
+                }
+                Console.WriteLine(recipe.Instructions);
+            } else
+            {
+                Console.WriteLine("Book does not exist");
+            }
+            Console.ReadKey(false);
         }
     }
 }

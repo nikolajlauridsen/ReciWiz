@@ -11,6 +11,11 @@ namespace ReciLib
         public string Name;
         private readonly List<Recipe> Recipies = new List<Recipe>();
 
+        public Cookbook(string name)
+        {
+            Name = name;
+        }
+
         public Recipe GetRecipe(string name)
         {
             foreach(Recipe recipe in Recipies)
@@ -26,6 +31,11 @@ namespace ReciLib
         public void CreateRecipe(string name, List<Ingredient> ingredients, string instructions)
         {
             Recipe recipe = new Recipe(name, instructions, ingredients);
+            Recipies.Add(recipe);
+        }
+
+        public void AddRecipe(Recipe recipe)
+        {
             Recipies.Add(recipe);
         }
     }
