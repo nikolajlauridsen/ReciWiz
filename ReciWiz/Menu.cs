@@ -17,7 +17,7 @@ namespace ReciWiz
             {
                 Console.Clear();
                 Console.WriteLine("Menu:");
-                Console.WriteLine("1. Create recipe\n2. View Recipe\n");
+                Console.WriteLine("1. Create recipe\n2. View Recipe\n3. Test db");
                 Console.Write("Input: ");
                 string uinput = Console.ReadLine();
                 switch (uinput)
@@ -27,6 +27,9 @@ namespace ReciWiz
                         break;
                     case "2":
                         Control.ShowRecipe();
+                        break;
+                    case "3":
+                        Control.test();
                         break;
                     default:
                         menuRunning = false;

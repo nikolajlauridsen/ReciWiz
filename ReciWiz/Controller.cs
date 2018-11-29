@@ -11,6 +11,13 @@ namespace ReciWiz
     {
         private CookbookRepo Repo = new CookbookRepo();
 
+        public void test()
+        {
+            Console.WriteLine("Creating DB");
+            SQLiteHandler db = new SQLiteHandler("yo mum");
+            Console.WriteLine("Done creating DB");
+        }
+
         public Controller()
         {
             Repo.CreateCookBook("Test");

@@ -1,6 +1,6 @@
 CREATE TABLE COOKBOOK(
-	Title			NVarChar(Max)		NOT NULL,
-	Author			NVarChar(Max)		NOT NULL,
+	Title			TEXT		NOT NULL,
+	Author			TEXT		NOT NULL,
 	ID				INT					IDENTITY(1,1),
 	-- PK
 	CONSTRAINT		COOKBOOK_PK			PRIMARY KEY(ID)
@@ -8,8 +8,8 @@ CREATE TABLE COOKBOOK(
 
 
 CREATE TABLE RECIPE(
-	Name			NVarChar(Max)		NOT NULL,
-	Directions		NVarChar(Max)		NOT NULL,
+	Name			TEXT		NOT NULL,
+	Directions		TEXT		NOT NULL,
 	ID				INT					IDENTITY(1,1),
 	CookbookID		INT					NOT NULL,
 	-- PK
@@ -23,7 +23,7 @@ CREATE TABLE RECIPE(
 
 
 CREATE TABLE INGREDIENT(
-	Name			NVarChar(Max)		NOT NULL,
+	Name			TEXT		NOT NULL,
 	ID				INT					IDENTITY(1,1),
 	-- PK
 	CONSTRAINT		INGREDIENT_PK		PRIMARY KEY(ID)
@@ -33,8 +33,8 @@ CREATE TABLE INGREDIENT(
 CREATE TABLE INGREDIENTLINE(
 	RecipeID		INT					NOT NULL,
 	IngredientID	INT					NOT NULL,
-	Quantity		DECIMAL(5,2)		NOT NULL,
-	Unit			NVarChar(Max)		NOT NULL,
+	Quantity		REAL        		NOT NULL,
+	Unit			TEXT    		    NOT NULL,
 	ID				INT					IDENTITY(1,1),
 	-- PK
 	CONSTRAINT		ILine_PK			PRIMARY KEY(ID),
