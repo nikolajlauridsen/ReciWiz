@@ -74,7 +74,7 @@ namespace ReciWiz
                 Console.WriteLine("\nIngredients:");
                 foreach (Ingredient ingredient in recipe.Ingredients)
                 {
-                    Console.WriteLine(String.Format("{0} {1} {2}", ingredient.Quantity, ingredient.Unit, ingredient.Name));
+                    Console.WriteLine(String.Format("{0} {1} {2}\n", ingredient.Quantity, ingredient.Unit, ingredient.Name));
                 }
                 Console.WriteLine(recipe.Instructions);
             } else
