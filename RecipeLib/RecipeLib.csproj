@@ -46,6 +46,8 @@
     <Compile Include="Domain\CookbookRepo.cs" />
     <Compile Include="Domain\Ingredient.cs" />
     <Compile Include="Domain\IngredientRepo.cs" />
+    <Compile Include="Persistence\IDB.cs" />
+    <Compile Include="Persistence\LiteConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Recipe.cs" />
   </ItemGroup>
