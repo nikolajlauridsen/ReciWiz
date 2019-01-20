@@ -1,0 +1,6 @@
+ReciWiz Menu!
+Press menu number or 0 to exit:
+Create recipe;crecipe
+Show Recipe;srecipe
+Create cookbook;cbook
+Show books;sbook
