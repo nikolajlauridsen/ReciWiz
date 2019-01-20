@@ -19,6 +19,7 @@ namespace ReciWiz
 
             binds.Bind("crecipe", CreateRecipe);
             binds.Bind("srecipe", ShowRecipe);
+            binds.Bind("cbook", CreateBook);
 
             menu = new SmartMenu(binds);
             menu.LoadMenu("menu.txt");
@@ -94,5 +95,11 @@ namespace ReciWiz
             control.CreateRecipe(bookName, reciName, ingredients, instructions);
         }
 
+        public void CreateBook()
+        {
+            Console.Write("Book name: ");
+            string name = Console.ReadLine();
+            control.CreateCookbook(name);
+        }
     }
 }
