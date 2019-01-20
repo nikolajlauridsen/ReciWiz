@@ -14,7 +14,7 @@ namespace RecipeLib.Domain
         {
             Ingredient i = FindIngredient(name);
             if(i == null) {
-                i = new Ingredient(name);
+                i = CreateIngredient(name);
             }
 
             return i;
@@ -28,6 +28,11 @@ namespace RecipeLib.Domain
                 }
             }
             return null;
+        }
+
+        private Ingredient CreateIngredient(string name)
+        {
+            return new Ingredient(name); 
         }
     }
 }
