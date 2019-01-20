@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReciLib
+namespace RecipeLib.Domain
 {
     public class CookbookRepo
     {
         private readonly List<Cookbook> Books = new List<Cookbook>();
+
+        public CookbookRepo()
+        {
+            Books.Add(new Cookbook("test"));
+        }
 
         public Cookbook GetBook(string name)
         {

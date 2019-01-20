@@ -4,19 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReciLib
+namespace RecipeLib.Domain
 {
     public class Ingredient
     {
         public string Name;
-        public double Quantity;
-        public string Unit;
 
-        public Ingredient(string name, string unit, double qty)
+        public Ingredient(string name)
         {
             Name = name;
-            Unit = unit;
-            Quantity = qty;
         }
     }
 }
