@@ -32,5 +32,14 @@ namespace RecipeLib.Domain
             Cookbook book = new Cookbook(name);
             Books.Add(book);
         }
+
+        public List<string> GetBooksData()
+        {
+            List<string> bookData = new List<string>();
+            foreach(Cookbook book in Books) {
+                bookData.Add(book.Name);
+            }
+            return bookData;
+        }
     }
 }

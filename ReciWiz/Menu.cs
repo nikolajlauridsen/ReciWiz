@@ -20,6 +20,7 @@ namespace ReciWiz
             binds.Bind("crecipe", CreateRecipe);
             binds.Bind("srecipe", ShowRecipe);
             binds.Bind("cbook", CreateBook);
+            binds.Bind("sbook", ShowBook);
 
             menu = new SmartMenu(binds);
             menu.LoadMenu("menu.txt");
@@ -100,6 +101,16 @@ namespace ReciWiz
             Console.Write("Book name: ");
             string name = Console.ReadLine();
             control.CreateCookbook(name);
+        }
+
+        public void ShowBook()
+        {
+            List<string> bookNames = control.GetBooks();
+
+            Console.WriteLine("Available books: ");
+            foreach(string bookName in bookNames) {
+                Console.WriteLine($"\t{bookName}");
+            }
         }
     }
 }

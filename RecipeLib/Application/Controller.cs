@@ -27,5 +27,10 @@ namespace RecipeLib.Application
         {
             return bookRepo.GetBook(cookbookname).GetRecipeData(recipeName);
         }
+
+        public List<string> GetBooks()
+        {
+            return bookRepo.GetBooksData();
+        }
     }
 }
