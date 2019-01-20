@@ -32,7 +32,7 @@ namespace RecipeLib.Domain
 
         private Ingredient CreateIngredient(string name)
         {
-            return new Ingredient(name); 
+            return new Ingredient(name, 0); 
         }
     }
 }

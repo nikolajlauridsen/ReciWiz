@@ -22,17 +22,22 @@ namespace RecipeLib.Persistence
             conn = new SQLiteConnection(ConnectionString);
         }
 
-        public void CreateCookbook(string name)
+        public int CreateCookbook(string name)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateIngredient(string name)
+        public int CreateIngredient(string name)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateRecipe(string cookbookName, string recipeName, List<Dictionary<string, string>> ingredientsData, string instructions)
+        public int CreateRecipe(string cookbookName, string recipeName, List<Dictionary<string, string>> ingredientsData, string instructions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, object> GetAllIngredients()
         {
             throw new NotImplementedException();
         }
@@ -42,7 +47,7 @@ namespace RecipeLib.Persistence
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, object> GetIngredients()
+        public Dictionary<string, object> GetIngredients(int recipeID)
         {
             throw new NotImplementedException();
         }

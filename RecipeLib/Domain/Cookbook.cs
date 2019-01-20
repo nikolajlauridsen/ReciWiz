@@ -9,6 +9,9 @@ namespace RecipeLib.Domain
     public class Cookbook
     {
         public string Name;
+        public string Author;
+        public int ID;
+
         private IngredientRepo ingredientRepo = new IngredientRepo();
 
         private readonly List<Recipe> Recipies = new List<Recipe>();
@@ -34,7 +37,7 @@ namespace RecipeLib.Domain
         {
             
             Recipe recipe = GetRecipe(recipeName);
-            return recipe.GetRecipeData() ;
+            return recipe.GetContext() ;
         }
 
         public void CreateRecipe(string name, List<Dictionary<string, string>> ingredientsData, string instructions)
@@ -53,6 +56,17 @@ namespace RecipeLib.Domain
         public void AddRecipe(Recipe recipe)
         {
             Recipies.Add(recipe);
+        }
+
+        public Dictionary<string, object> GetContext()
+        {
+            Dictionary<string, object> context = new Dictionary<string, object>();
+
+            context["name"] = Name;
+            context["author"] = Author;
+            context["id"] = ID;
+
+            return context;
         }
     }
 }

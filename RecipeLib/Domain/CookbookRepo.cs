@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RecipeLib.Persistence;
 
 namespace RecipeLib.Domain
 {
     public class CookbookRepo
     {
         private readonly List<Cookbook> Books = new List<Cookbook>();
+        private readonly IDB db;
 
         public CookbookRepo()
         {
             Books.Add(new Cookbook("test"));
+            db = new LiteConnector();
         }
 
         public Cookbook GetBook(string name)
@@ -33,11 +36,11 @@ namespace RecipeLib.Domain
             Books.Add(book);
         }
 
-        public List<string> GetBooksData()
+        public List<Dictionary<string, object>> GetBooksData()
         {
-            List<string> bookData = new List<string>();
+            List<Dictionary<string, object>> bookData = new List<Dictionary<string, object>>();
             foreach(Cookbook book in Books) {
-                bookData.Add(book.Name);
+                bookData.Add(book.GetContext());
             }
             return bookData;
         }

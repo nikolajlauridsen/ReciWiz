@@ -8,17 +8,20 @@ namespace RecipeLib.Persistence
 {
     public interface IDB
     {
-        Dictionary<string, object> GetIngredients();
+        Dictionary<string, object> GetAllIngredients();
+
+        Dictionary<string, object> GetIngredients(int recipeID);
 
         Dictionary<string, object> GetCookBooks();
 
         Dictionary<string, object> GetRecipies(string cookbookName);
 
-        void CreateIngredient(string name);
+        // Returns their ID
+        int CreateIngredient(string name);
 
-        void CreateCookbook(string name);
+        int CreateCookbook(string name);
 
-        void CreateRecipe(string cookbookName, string recipeName,
+        int CreateRecipe(string cookbookName, string recipeName,
             List<Dictionary<string, string>> ingredientsData, string instructions);
     }
 }

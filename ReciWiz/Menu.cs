@@ -48,8 +48,8 @@ namespace ReciWiz
             Console.WriteLine("\n" + (string)data["name"] + "\n");
             Console.WriteLine("Ingredients");
 
-            List<Dictionary<string, string>> ingredients = (List<Dictionary<string, string>>)data["ingredients"];
-            foreach(Dictionary<string, string> ingredient in ingredients) {
+            List<Dictionary<string, object>> ingredients = (List<Dictionary<string, object>>)data["ingredients"];
+            foreach(Dictionary<string, object> ingredient in ingredients) {
                 Console.WriteLine($"\t{ingredient["quantity"]} {ingredient["unit"]} {ingredient["name"]}");
             }
 
@@ -105,11 +105,11 @@ namespace ReciWiz
 
         public void ShowBook()
         {
-            List<string> bookNames = control.GetBooks();
+            List<Dictionary<string, object>> books = control.GetBooks();
 
             Console.WriteLine("Available books: ");
-            foreach(string bookName in bookNames) {
-                Console.WriteLine($"\t{bookName}");
+            foreach(Dictionary<string, object> book in books) {
+                Console.WriteLine($"\t{book["name"]}");
             }
         }
     }

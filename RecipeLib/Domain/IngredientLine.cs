@@ -19,11 +19,11 @@ namespace RecipeLib.Domain
             Unit = unit;
         }
 
-		internal Dictionary<string, string> GetContext()
+		internal Dictionary<string, object> GetContext()
         {
-            Dictionary<string, string> context = new Dictionary<string, string>();
+            Dictionary<string, object> context = new Dictionary<string, object>();
             context["name"] = this.Ingredient.Name;
-            context["quantity"] = Quantity.ToString(); ;
+            context["quantity"] = Quantity;
             context["unit"] = Unit;
 
             return context;
