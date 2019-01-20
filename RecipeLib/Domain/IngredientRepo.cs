@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RecipeLib.Persistence;
 
 namespace RecipeLib.Domain
 {
     class IngredientRepo
     {
-        List<Ingredient> ingredients = new List<Ingredient>();
+        private List<Ingredient> ingredients = new List<Ingredient>();
+        private IDB db = new LiteConnector();
+
+        public IngredientRepo()
+        {
+            foreach(Dictionary<string, object> ingredientData in db.GetAllIngredients()) {
+                Ingredient ingridient = new Ingredient((string)ingredientData["name"], (int)ingredientData["id"]);
+            }
+        }
 
         public Ingredient GetIngredient(string name)
         {
@@ -32,7 +41,8 @@ namespace RecipeLib.Domain
 
         private Ingredient CreateIngredient(string name)
         {
-            return new Ingredient(name, 0); 
+            int id = db.CreateIngredient(name);
+            return new Ingredient(name, id); 
         }
     }
 }

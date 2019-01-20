@@ -37,7 +37,7 @@ namespace RecipeLib.Persistence
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, object> GetAllIngredients()
+        public List<Dictionary<string, object>> GetAllIngredients()
         {
             throw new NotImplementedException();
         }
