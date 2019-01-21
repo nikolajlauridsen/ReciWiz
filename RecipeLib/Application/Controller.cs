@@ -13,13 +13,13 @@ namespace RecipeLib.Application
         CookbookRepo bookRepo = new CookbookRepo();
 
         // Create
-        public void CreateRecipe(string cookbookname, string name, List<Dictionary<string, string>> ingredientsData, string instructctions) {
+        public void CreateRecipe(string cookbookname, string name, List<Dictionary<string, object>> ingredientsData, string instructctions) {
             bookRepo.GetBook(cookbookname).CreateRecipe(name, ingredientsData, instructctions);
         }
 
-        public void CreateCookbook(string name)
+        public void CreateCookbook(string name, string author)
         {
-            bookRepo.CreateCookBook(name);
+            bookRepo.CreateCookBook(name, author);
         }
 
         // Read

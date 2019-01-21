@@ -14,14 +14,15 @@ namespace RecipeLib.Domain
 
         public List<IngredientLine> Ingredients { get; private set; }
         
-        public Recipe(string name, string instructions, List<IngredientLine> ingredients)
+        public Recipe(string name, string instructions, List<IngredientLine> ingredients, int id)
         {
             Ingredients = ingredients;
             Name = name;
             Instructions = instructions;
         }
 
-        public Recipe(string name, string instructions): this(name, instructions, null)
+
+        public Recipe(string name, string instructions): this(name, instructions, null, 0)
         {
             Ingredients = new List<IngredientLine>();
         }

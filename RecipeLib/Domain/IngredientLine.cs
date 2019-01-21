@@ -23,6 +23,7 @@ namespace RecipeLib.Domain
         {
             Dictionary<string, object> context = new Dictionary<string, object>();
             context["name"] = this.Ingredient.Name;
+            context["id"] = this.Ingredient.ID; 
             context["quantity"] = Quantity;
             context["unit"] = Unit;
 

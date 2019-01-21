@@ -71,7 +71,7 @@ namespace ReciWiz
             reciName = Console.ReadLine();
 
             // Take ingredients
-            List<Dictionary<string, string>> ingredients = new List<Dictionary<string, string>>();
+            List<Dictionary<string, object>> ingredients = new List<Dictionary<string, object>>();
             bool takeIngredient = true;
             while (takeIngredient) {
                 Console.Write("Ingredient (quantity unit name): ");
@@ -82,8 +82,8 @@ namespace ReciWiz
                 }
 
                 string[] split = uInput.Split(' ');
-                Dictionary<string, string> context = new Dictionary<string, string>();
-                context["quantity"] = split[0];
+                Dictionary<string, object> context = new Dictionary<string, object>();
+                context["quantity"] = Double.Parse(split[0]);
                 context["unit"] = split[1];
                 context["name"] = split[2];
                 ingredients.Add(context);
@@ -100,7 +100,9 @@ namespace ReciWiz
         {
             Console.Write("Book name: ");
             string name = Console.ReadLine();
-            control.CreateCookbook(name);
+            Console.Write("Author name: ");
+            string author = Console.ReadLine();
+            control.CreateCookbook(name, author);
         }
 
         public void ShowBook()

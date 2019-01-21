@@ -22,39 +22,173 @@ namespace RecipeLib.Persistence
             conn = new SQLiteConnection(ConnectionString);
         }
 
-        public int CreateCookbook(string name)
+        public int CreateCookbook(string name, string author)
         {
-            throw new NotImplementedException();
+            int rowId;
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
+                cmd.CommandText = @"INSERT INTO COOKBOOK (Title, Author, ID) VALUES (@name, @author, null);";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SQLiteParameter("@name", name));
+                cmd.Parameters.Add(new SQLiteParameter("@author", author));
+                cmd.ExecuteNonQuery();
+            }
+
+            // Get ID
+            rowId = Convert.ToInt32(conn.LastInsertRowId);
+            conn.Close();
+
+            return rowId;
         }
 
         public int CreateIngredient(string name)
         {
-            throw new NotImplementedException();
+            int rowId;
+            conn.Open();
+            // Insert ingredient
+            using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
+                cmd.CommandText = @"INSERT INTO INGREDIENT (Name, ID) VALUES(@name, null)";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SQLiteParameter("@name", name));
+                cmd.ExecuteNonQuery();
+            }
+
+            // Get ID
+            rowId = Convert.ToInt32(conn.LastInsertRowId);
+            conn.Close();
+
+            return rowId;
         }
 
-        public int CreateRecipe(string cookbookName, string recipeName, List<Dictionary<string, string>> ingredientsData, string instructions)
+        public int CreateRecipe(int cookBookId, string recipeName, List<Dictionary<string, object>> ingredientsData, string instructions)
         {
-            throw new NotImplementedException();
+            int recipeId;
+
+            conn.Open();
+            // Insert recipe
+            using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
+                cmd.CommandText = @"INSERT INTO RECIPE (Name, Directions, CookbookID) VALUES(@name, @directions, @bookID)";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SQLiteParameter("@name", recipeName));
+                cmd.Parameters.Add(new SQLiteParameter("@Directions", instructions));
+                cmd.Parameters.Add(new SQLiteParameter("@bookID", cookBookId));
+                cmd.ExecuteNonQuery();
+            }
+            // Get ID
+            recipeId = Convert.ToInt32(conn.LastInsertRowId);
+
+            // Innsert ingredientlines
+            foreach(Dictionary<string, object> ingredientData in ingredientsData) {
+                using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
+                    cmd.CommandText = @"INSERT INTO INGREDIENTLINE (RecipeID, IngredientID, Quantity, Unit, ID) VALUES(@recipeID, @ingredientID, @quantity, @unit, null)";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.Add(new SQLiteParameter("@recipeID", recipeId));
+                    cmd.Parameters.Add(new SQLiteParameter("@ingredientId", ingredientData["id"]));
+                    cmd.Parameters.Add(new SQLiteParameter("@quantity", ingredientData["quantity"]));
+                    cmd.Parameters.Add(new SQLiteParameter("@unit", ingredientData["unit"]));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            conn.Close();
+
+            return recipeId;
         }
 
         public List<Dictionary<string, object>> GetAllIngredients()
         {
-            throw new NotImplementedException();
+            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(@"SELECT Name, ID FROM INGREDIENT;", conn)) {
+                using(SQLiteDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Dictionary<string, object> context = new Dictionary<string, object>();
+                        context["name"] = reader["Name"];
+                        context["id"] = Convert.ToInt32(reader["ID"]);
+                        data.Add(context);
+                    }
+                }
+
+            }
+            
+            conn.Close();
+
+            return data;
         }
 
-        public Dictionary<string, object> GetCookBooks()
+        public List<Dictionary<string, object>> GetCookBooks()
         {
-            throw new NotImplementedException();
+            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(@"SELECT Title, Author, ID FROM COOKBOOK;", conn)) {
+                using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Dictionary<string, object> context = new Dictionary<string, object>();
+                        context["title"] = reader["Title"];
+                        context["author"] = reader["Author"];
+                        context["id"] = Convert.ToInt32(reader["ID"]);
+                        data.Add(context);
+                    }
+                }
+
+            }
+            conn.Close();
+
+            return data;
         }
 
-        public Dictionary<string, object> GetIngredients(int recipeID)
+        public List<Dictionary<string, object>> GetIngredients(int recipeID)
         {
-            throw new NotImplementedException();
+            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
+                cmd.CommandText = @"SELECT I.Name, IL.Quantity, IL.Unit FROM INGREDIENT AS I INNER JOIN INGREDIENTLINE AS IL ON IL.IngredientID = I.ID WHERE IL.RecipeID = @ID;";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SQLiteParameter("@ID", recipeID));
+
+                using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Dictionary<string, object> context = new Dictionary<string, object>();
+                        context["name"] = reader["Name"];
+                        context["quantity"] = reader["Quantity"];
+                        context["unit"] = reader["Unit"];
+                        data.Add(context);
+                    }
+                }
+
+            }
+            conn.Close();
+
+            return data;
         }
 
-        public Dictionary<string, object> GetRecipies(string cookbookName)
+        public List<Dictionary<string, object>> GetRecipies(int CookBookID)
         {
-            throw new NotImplementedException();
+            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            // get main data
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(@"SELECT Name, Directions, ID FROM RECIPE WHERE CookbookID=@bookId;", conn)) {
+                cmd.Parameters.Add(new SQLiteParameter("@bookId", CookBookID));
+                using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Dictionary<string, object> context = new Dictionary<string, object>();
+                        context["name"] = reader["Name"];
+                        context["directions"] = reader["Directions"];
+                        context["id"] = Convert.ToInt32(reader["ID"]);
+                        data.Add(context);
+                    }
+                }
+
+            }
+            conn.Close();
+
+            foreach(Dictionary<string, object> context in data) {
+                context["ingredients"] = GetIngredients((int)context["id"]);
+            }
+
+            return data;
         }
     }
 }

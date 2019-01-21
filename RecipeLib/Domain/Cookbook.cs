@@ -3,22 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RecipeLib.Persistence;
 
 namespace RecipeLib.Domain
 {
     public class Cookbook
     {
-        public string Name;
+        public string Title;
         public string Author;
         public int ID;
+        private IDB db = new LiteConnector();
 
         private IngredientRepo ingredientRepo = new IngredientRepo();
 
         private readonly List<Recipe> Recipies = new List<Recipe>();
 
-        public Cookbook(string name)
+        public Cookbook(string name, string author, int id)
         {
-            Name = name;
+            Title = name;
+            Author = author;
+            ID = id;
+
+            foreach (Dictionary<string, object> recipeData in db.GetRecipies(id)) {
+                List<IngredientLine> ingredients = createIngredientLinesObjects(((List<Dictionary<string, object>>)recipeData["ingredients"]));
+                Recipe recipe = new Recipe((string)recipeData["name"], (string)recipeData["directions"], ingredients, (int)recipeData["id"]);
+                Recipies.Add(recipe);
+            }
         }
 
         public Recipe GetRecipe(string name)
@@ -40,16 +50,17 @@ namespace RecipeLib.Domain
             return recipe.GetContext() ;
         }
 
-        public void CreateRecipe(string name, List<Dictionary<string, string>> ingredientsData, string instructions)
+        public void CreateRecipe(string name, List<Dictionary<string, object>> ingredientsData, string instructions)
         {
             // Create ingredient lines
-            List<IngredientLine> ingredients = new List<IngredientLine>();
-            foreach (Dictionary<string, string> ingredientData in ingredientsData) {
-                Ingredient ingredient = ingredientRepo.GetIngredient(ingredientData["name"]);
-                ingredients.Add(new IngredientLine(ingredient, double.Parse(ingredientData["quantity"]), ingredientData["unit"]));
+            List<IngredientLine> ingredients = createIngredientLinesObjects(ingredientsData);
+            ingredientsData = new List<Dictionary<string, object>>();
+            foreach(IngredientLine ingredient in ingredients) {
+                ingredientsData.Add(ingredient.GetContext());
             }
 
-            Recipe recipe = new Recipe(name, instructions, ingredients);
+            int recipeID = db.CreateRecipe(ID, name, ingredientsData, instructions);
+            Recipe recipe = new Recipe(name, instructions, ingredients, recipeID);
             Recipies.Add(recipe);
         }
 
@@ -62,11 +73,21 @@ namespace RecipeLib.Domain
         {
             Dictionary<string, object> context = new Dictionary<string, object>();
 
-            context["name"] = Name;
+            context["name"] = Title;
             context["author"] = Author;
             context["id"] = ID;
 
             return context;
+        }
+
+        private List<IngredientLine> createIngredientLinesObjects(List<Dictionary<string, object>> ingredientsData)
+        {
+            List<IngredientLine> ingredients = new List<IngredientLine>();
+            foreach (Dictionary<string, object> ingredientData in ingredientsData) {
+                Ingredient ingredient = ingredientRepo.GetIngredient((string)ingredientData["name"]);
+                ingredients.Add(new IngredientLine(ingredient, (double)ingredientData["quantity"], (string)ingredientData["unit"]));
+            }
+            return ingredients;
         }
     }
 }

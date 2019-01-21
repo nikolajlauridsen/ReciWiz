@@ -10,18 +10,18 @@ namespace RecipeLib.Persistence
     {
         List<Dictionary<string, object>> GetAllIngredients();
 
-        Dictionary<string, object> GetIngredients(int recipeID);
+        List<Dictionary<string, object>> GetIngredients(int recipeID);
 
-        Dictionary<string, object> GetCookBooks();
+        List<Dictionary<string, object>> GetCookBooks();
 
-        Dictionary<string, object> GetRecipies(string cookbookName);
+        List<Dictionary<string, object>> GetRecipies(int cookBookID);
 
         // Returns their ID
         int CreateIngredient(string name);
 
-        int CreateCookbook(string name);
+        int CreateCookbook(string name, string author);
 
-        int CreateRecipe(string cookbookName, string recipeName,
-            List<Dictionary<string, string>> ingredientsData, string instructions);
+        int CreateRecipe(int cookBookId, string recipeName,
+            List<Dictionary<string, object>> ingredientsData, string instructions);
     }
 }

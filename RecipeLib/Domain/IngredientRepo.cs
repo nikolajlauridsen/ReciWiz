@@ -16,6 +16,7 @@ namespace RecipeLib.Domain
         {
             foreach(Dictionary<string, object> ingredientData in db.GetAllIngredients()) {
                 Ingredient ingridient = new Ingredient((string)ingredientData["name"], (int)ingredientData["id"]);
+                ingredients.Add(ingridient);
             }
         }
 

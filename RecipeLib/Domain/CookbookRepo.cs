@@ -14,15 +14,18 @@ namespace RecipeLib.Domain
 
         public CookbookRepo()
         {
-            Books.Add(new Cookbook("test"));
             db = new LiteConnector();
+
+            foreach(Dictionary<string, object> bookData in db.GetCookBooks()) {
+                CreateCookBook((string)bookData["title"], (string)bookData["author"], (int)bookData["id"]);
+            }
         }
 
         public Cookbook GetBook(string name)
         {
             foreach(Cookbook book in Books)
             {
-                if(book.Name == name)
+                if(book.Title == name)
                 {
                     return book;
                 }
@@ -30,9 +33,15 @@ namespace RecipeLib.Domain
             return null;
         }
 
-        public void CreateCookBook(string name)
+        public void CreateCookBook(string name, string author)
         {
-            Cookbook book = new Cookbook(name);
+            int bookID = db.CreateCookbook(name, author);
+            CreateCookBook(name, author, bookID);
+        }
+
+        private void CreateCookBook(string name, string author, int id)
+        {
+            Cookbook book = new Cookbook(name, author, id);
             Books.Add(book);
         }
 
