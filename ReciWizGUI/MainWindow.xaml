@@ -20,11 +20,13 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             <StackPanel Name="RecipePanel" Background="LightGray" DockPanel.Dock="Left">
-
+                <Button Width="200" Height="25">
+                    Recipe one
+                </Button>
             </StackPanel>
         </ScrollViewer>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Background="LightGray">
             <Frame NavigationUIVisibility="Hidden" Name="ViewHolder">
 
             </Frame>
