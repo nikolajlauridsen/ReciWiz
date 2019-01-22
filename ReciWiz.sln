@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciTest", "ReciTest\ReciTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeLib", "RecipeLib\RecipeLib.csproj", "{4841AAEE-86EA-4E1C-8B4C-EC8821097364}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciWizGUI", "ReciWizGUI\ReciWizGUI.csproj", "{495306AE-DEEE-4F04-BCAC-AB2D5C0CEE11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4841AAEE-86EA-4E1C-8B4C-EC8821097364}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4841AAEE-86EA-4E1C-8B4C-EC8821097364}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4841AAEE-86EA-4E1C-8B4C-EC8821097364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{495306AE-DEEE-4F04-BCAC-AB2D5C0CEE11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495306AE-DEEE-4F04-BCAC-AB2D5C0CEE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495306AE-DEEE-4F04-BCAC-AB2D5C0CEE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495306AE-DEEE-4F04-BCAC-AB2D5C0CEE11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
