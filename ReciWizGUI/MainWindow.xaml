@@ -6,21 +6,23 @@
         xmlns:local="clr-namespace:ReciWizGUI"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1080">
-    <WrapPanel>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <StackPanel Name="BookPanel" Background="SlateGray" DockPanel.Dock="Left">
 
-        <StackPanel Name="BookPanel" Background="SlateGray" Height="690">
-
-            <Button Width="200" Height="50" >
-                CookbookOne
-            </Button>
+                <Button Width="200" Height="50" >
+                    CookbookOne
+                </Button>
             
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
 
-        <StackPanel Name="RecipePanel" Background="LightGray">
-            <Button Width="200" Height="25" >
-                RecipeOne
-            </Button>
-        </StackPanel>
-        
-    </WrapPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <StackPanel Name="RecipePanel" Background="LightGray" DockPanel.Dock="Left">
+                <Button Width="200" Height="25" >
+                    RecipeOne
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
