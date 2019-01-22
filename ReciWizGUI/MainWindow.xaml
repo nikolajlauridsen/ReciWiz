@@ -18,7 +18,7 @@
 
         <StackPanel Name="RecipePanel" Background="LightGray">
             <Button Width="200" Height="25" >
-                CookbookOne
+                RecipeOne
             </Button>
         </StackPanel>
         
