@@ -20,29 +20,39 @@ namespace ReciWizGUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
         Controller controller = new Controller();
         public MainWindow()
         {
             InitializeComponent();
+            LoadBooks();
 
-            foreach(Dictionary<string, object> book in controller.GetBooks()) {
-                Button button = new Button();
-                button.Content = (string)book["name"];
-                button.Width = 200;
-                button.Height = 50;
+        }
+
+
+        public void LoadBooks()
+        {
+            foreach (Dictionary<string, object> book in controller.GetBooks()) {
+                Button button = new BookButton((int)book["id"], (string)book["name"], LoadRecipies);
                 button.Background = BookPanel.Background;
-                button.BorderThickness = new Thickness(2);
-                button.FontSize = 16;
-
                 BookPanel.Children.Add(button);
             }
         }
 
-        public void Test()
+        public void LoadRecipies(object sender, EventArgs e)
         {
-
+            RecipePanel.Children.Clear();
+            BookButton senderButton = (BookButton)sender;
+            // Implement getRecipies and change books to that
+            foreach(Dictionary<string, object> recipe in controller.GetRecipies(senderButton.Id)) {
+                Button button = new Button();
+                button.Height = 25;
+                button.Width = 200;
+                button.Content = (string)recipe["name"];
+                RecipePanel.Children.Add(button);
+            }
         }
     }
 }

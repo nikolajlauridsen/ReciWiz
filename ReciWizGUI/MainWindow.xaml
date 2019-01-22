@@ -8,12 +8,18 @@
         Title="MainWindow" Height="720" Width="1080">
     <WrapPanel>
 
-        <StackPanel Name="BookPanel" Background="SlateGray" Height="720">
+        <StackPanel Name="BookPanel" Background="SlateGray" Height="690">
 
             <Button Width="200" Height="50" >
                 CookbookOne
             </Button>
             
+        </StackPanel>
+
+        <StackPanel Name="RecipePanel" Background="LightGray">
+            <Button Width="200" Height="25" >
+                CookbookOne
+            </Button>
         </StackPanel>
         
     </WrapPanel>

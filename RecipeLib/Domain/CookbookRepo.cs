@@ -25,8 +25,18 @@ namespace RecipeLib.Domain
         {
             foreach(Cookbook book in Books)
             {
-                if(book.Title == name)
+                if(book.Title.Equals(name))
                 {
+                    return book;
+                }
+            }
+            return null;
+        }
+
+        public Cookbook GetBook(int id)
+        {
+            foreach(Cookbook book in Books) {
+                if(book.ID == id) {
                     return book;
                 }
             }

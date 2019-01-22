@@ -80,6 +80,21 @@ namespace RecipeLib.Domain
             return context;
         }
 
+        public List<Dictionary<string, object>> GetRecipeOverview()
+        {
+            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            foreach(Recipe recipe in Recipies) {
+                Dictionary<string, object> context = new Dictionary<string, object>();
+
+                context["name"] = recipe.Name;
+                context["id"] = recipe.ID;
+                data.Add(context);
+            }
+            
+
+            return data;
+        }
+
         private List<IngredientLine> createIngredientLinesObjects(List<Dictionary<string, object>> ingredientsData)
         {
             List<IngredientLine> ingredients = new List<IngredientLine>();

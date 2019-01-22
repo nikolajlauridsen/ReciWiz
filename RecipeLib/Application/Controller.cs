@@ -32,5 +32,10 @@ namespace RecipeLib.Application
         {
             return bookRepo.GetBooksData();
         }
+
+        public List<Dictionary<string, object>> GetRecipies(int bookID)
+        {
+            return bookRepo.GetBook(bookID).GetRecipeOverview();
+        }
     }
 }
