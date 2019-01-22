@@ -11,7 +11,6 @@ namespace ReciWizGUI
     public partial class BookButton : Button
     {
         public int Id;
-        private Action clickAction;
 
         public BookButton(int id, string name, RoutedEventHandler handler) : base()
         {
