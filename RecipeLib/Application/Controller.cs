@@ -28,6 +28,11 @@ namespace RecipeLib.Application
             return bookRepo.GetBook(cookbookname).GetRecipeData(recipeName);
         }
 
+        public Dictionary<string, object> GetRecipe(int bookID, int recipeID)
+        {
+            return bookRepo.GetBook(bookID).GetRecipeData(recipeID);
+        }
+
         public List<Dictionary<string, object>> GetBooks()
         {
             return bookRepo.GetBooksData();

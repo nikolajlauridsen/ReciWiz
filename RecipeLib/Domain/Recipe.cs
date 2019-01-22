@@ -19,6 +19,7 @@ namespace RecipeLib.Domain
             Ingredients = ingredients;
             Name = name;
             Instructions = instructions;
+            ID = id;
         }
 
 

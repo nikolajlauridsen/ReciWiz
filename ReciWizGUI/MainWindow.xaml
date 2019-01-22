@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReciWizGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1080">
-    <DockPanel>
+        Title="ReciWiz" Height="720" Width="1080">
+
+    <DockPanel Name="Root">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             <StackPanel Name="BookPanel" Background="SlateGray" DockPanel.Dock="Left">
 
@@ -19,10 +20,15 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             <StackPanel Name="RecipePanel" Background="LightGray" DockPanel.Dock="Left">
-                <Button Width="200" Height="25" >
-                    RecipeOne
-                </Button>
+
             </StackPanel>
         </ScrollViewer>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <Frame NavigationUIVisibility="Hidden" Name="ViewHolder">
+
+            </Frame>
+        </ScrollViewer>
+        
     </DockPanel>
 </Window>

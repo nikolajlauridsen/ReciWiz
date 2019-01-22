@@ -8,16 +8,10 @@ using System.Windows.Controls;
 
 namespace ReciWizGUI
 {
-    public partial class BookButton : Button
+    public partial class BookButton : IDButton
     {
-        public int Id;
-
-        public BookButton(int id, string name, RoutedEventHandler handler) : base()
+        public BookButton(int id, string name, RoutedEventHandler handler) : base(id, name, handler)
         {
-            this.Id = id;
-
-            this.Click += handler;
-            this.Content = name;
             this.Width = 200;
             this.Height = 50;
             this.BorderThickness = new Thickness(2);

@@ -35,8 +35,18 @@ namespace RecipeLib.Domain
         {
             foreach(Recipe recipe in Recipies)
             {
-                if(name == recipe.Name)
+                if(name.Equals(recipe.Name))
                 {
+                    return recipe;
+                }
+            }
+            return null;
+        }
+
+        public Recipe GetRecipe(int id)
+        {
+            foreach (Recipe recipe in Recipies) {
+                if (id == recipe.ID) {
                     return recipe;
                 }
             }
@@ -48,6 +58,11 @@ namespace RecipeLib.Domain
             
             Recipe recipe = GetRecipe(recipeName);
             return recipe.GetContext() ;
+        }
+
+        public Dictionary<string, object> GetRecipeData(int recipeID)
+        {
+            return GetRecipe(recipeID).GetContext();
         }
 
         public void CreateRecipe(string name, List<Dictionary<string, object>> ingredientsData, string instructions)

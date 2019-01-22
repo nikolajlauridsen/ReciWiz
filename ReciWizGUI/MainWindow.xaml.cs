@@ -24,9 +24,13 @@ namespace ReciWizGUI
     public partial class MainWindow : Window
     {
         Controller controller = new Controller();
+        private int chosenbook;
+
         public MainWindow()
         {
             InitializeComponent();
+            RecipePanel.Children.Clear();
+            BookPanel.Children.Clear();
             LoadBooks();
 
         }
@@ -45,14 +49,19 @@ namespace ReciWizGUI
         {
             RecipePanel.Children.Clear();
             BookButton senderButton = (BookButton)sender;
+            chosenbook = senderButton.ID;
             // Implement getRecipies and change books to that
-            foreach(Dictionary<string, object> recipe in controller.GetRecipies(senderButton.Id)) {
-                Button button = new Button();
-                button.Height = 25;
-                button.Width = 200;
-                button.Content = (string)recipe["name"];
+            foreach(Dictionary<string, object> recipe in controller.GetRecipies(senderButton.ID)) {
+                Button button = new RecipeButton((int)recipe["id"], (string)recipe["name"], LoadRecipe);
                 RecipePanel.Children.Add(button);
             }
+        }
+
+        public void LoadRecipe(object sender, EventArgs e)
+        {
+            RecipeButton senderButton = (RecipeButton)sender;
+            RecipeViewer viewer = new RecipeViewer(controller.GetRecipe(chosenbook, senderButton.ID));
+            ViewHolder.Navigate(viewer);
         }
     }
 }
