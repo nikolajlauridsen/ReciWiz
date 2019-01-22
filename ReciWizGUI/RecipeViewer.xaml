@@ -10,7 +10,7 @@
 
 
     <DockPanel  Margin="30,20,30,20" HorizontalAlignment="Left" Background="LightGray">
-        <Label DockPanel.Dock="Top" FontSize="25" Name="RecipeName">Title</Label>
+        <Label DockPanel.Dock="Top" FontSize="25" Name="RecipeName" Padding="0,0,0,0">Title</Label>
         <Label DockPanel.Dock="Top" FontSize="14" Padding="0,20,0,0">Ingredients</Label>
         
         <ListView DockPanel.Dock="Top" Background="Transparent" BorderThickness="0" Padding="5,0,0,0" HorizontalAlignment="Left" Name="IngredientList">
