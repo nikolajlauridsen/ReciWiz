@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+
 
 namespace ReciWizGUI
 {
@@ -14,6 +16,8 @@ namespace ReciWizGUI
         {
             this.Width = 200;
             this.Height = 25;
+            this.BorderThickness = new Thickness(0, 0, 1, 1);
+            this.Background = Brushes.Transparent;
         }
     }
 }
