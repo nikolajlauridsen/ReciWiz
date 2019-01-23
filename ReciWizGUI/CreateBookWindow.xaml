@@ -10,14 +10,14 @@
 
     <DockPanel  Margin="30,20,30,20" HorizontalAlignment="Left">
         <Label FontSize="25" Padding="0,0,0,20" DockPanel.Dock="Top">Create recipe</Label>
-        <WrapPanel DockPanel.Dock="Top">
-            <Label>Cookbook name</Label>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+            <Label Padding="0,0,10,0">Cookbook name</Label>
             <TextBox Width="200" Height="18" Background="Transparent" Name="BookName"></TextBox>
         </WrapPanel>
-        <WrapPanel DockPanel.Dock="Top">
-            <Label>Author</Label>
-            <TextBox Width="200" Height="18" Background="Transparent" Name="Author"></TextBox>
-        </WrapPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+            <Label Padding="0,0,0,0">Author</Label>
+            <TextBox Width="200" Height="18" Background="Transparent" Name="Author" DockPanel.Dock="Bottom" HorizontalAlignment="Right"></TextBox>
+        </DockPanel>
         <WrapPanel>
             <Button Name="CreateBtn">
                 Create
