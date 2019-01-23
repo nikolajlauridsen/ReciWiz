@@ -9,7 +9,7 @@
       Title="CreateRecipe" Background="LightGray">
 
     <DockPanel  Margin="30,20,30,20" HorizontalAlignment="Left">
-        <Label FontSize="25" Padding="0,0,0,20" DockPanel.Dock="Top">Create recipe</Label>
+        <Label FontSize="25" Padding="0,0,0,20" DockPanel.Dock="Top">Create cookbook</Label>
         <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10">
             <Label Padding="0,0,10,0">Cookbook name</Label>
             <TextBox Width="200" Height="18" Background="Transparent" Name="BookName"></TextBox>

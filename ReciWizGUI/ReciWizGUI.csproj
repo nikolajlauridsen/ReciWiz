@@ -76,6 +76,9 @@
     <Compile Include="Pages\CreateBookWindow.xaml.cs">
       <DependentUpon>CreateBookWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CreateRecipe.xaml.cs">
+      <DependentUpon>CreateRecipe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RecipeViewer.xaml.cs">
       <DependentUpon>RecipeViewer.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\CreateRecipe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RecipeViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
