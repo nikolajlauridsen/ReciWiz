@@ -74,9 +74,22 @@ namespace ReciWizGUI
             LoadRecipeCreator(null, null);
         }
 
+        public void LoadCurrentRecipies(object sender, EventArgs e)
+        {
+            RecipePanel.Children.Clear();
+            // Implement getRecipies and change books to that
+            foreach (Dictionary<string, object> recipe in controller.GetRecipies(chosenbook)) {
+                Button button = new RecipeButton((int)recipe["id"], (string)recipe["name"], LoadRecipe);
+                RecipePanel.Children.Add(button);
+            }
+
+            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator);
+            RecipePanel.Children.Add(newButton);
+        }
+
         public void LoadRecipeCreator(object sender, EventArgs e)
         {
-            CreateRecipe recipeCreator = new CreateRecipe();
+            CreateRecipe recipeCreator = new CreateRecipe(controller, chosenbook, LoadCurrentRecipies);
             ViewHolder.Navigate(recipeCreator);
         }
 

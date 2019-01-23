@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ReciWizGUI.Widgets;
+using RecipeLib.Application;
 
 namespace ReciWizGUI.Pages
 {
@@ -20,9 +22,45 @@ namespace ReciWizGUI.Pages
     /// </summary>
     public partial class CreateRecipe : Page
     {
-        public CreateRecipe()
+        Controller controller;
+        private int BookID;
+
+        public CreateRecipe(Controller ctrl, int bookID, RoutedEventHandler listener)
         {
             InitializeComponent();
+            controller = ctrl;
+            BookID = bookID;
+
+            IngredientContainer.Children.Clear();
+
+            ingredientAdd.Click += IngredientAdd;
+            IngredientContainer.Children.Add(new IngredientInput());
+
+            createBtn.Click += createRecipe;
+            createBtn.Click += listener;
+
         }
+
+        public void IngredientAdd(object sender, EventArgs e)
+        {
+            IngredientContainer.Children.Add(new IngredientInput());
+        }
+
+        private void createRecipe(object sender, EventArgs e)
+        {
+            // Pack ingredient data
+            List<Dictionary<string, object>> ingredientData = new List<Dictionary<string, object>>();
+            foreach(UIElement ingredient in IngredientContainer.Children) {
+                ingredientData.Add(((IngredientInput)ingredient).GetIngredientData());
+            }
+
+            TextRange instructions = new TextRange(
+                    Instructions.Document.ContentStart,
+                    Instructions.Document.ContentEnd
+                );
+
+            controller.CreateRecipe(BookID, RecipeName.Text, ingredientData, instructions.Text);
+        }
+
     }
 }

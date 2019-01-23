@@ -17,6 +17,11 @@ namespace RecipeLib.Application
             bookRepo.GetBook(cookbookname).CreateRecipe(name, ingredientsData, instructctions);
         }
 
+        public void CreateRecipe(int cookbookID, string name, List<Dictionary<string, object>> ingredientsData, string instructctions)
+        {
+            bookRepo.GetBook(cookbookID).CreateRecipe(name, ingredientsData, instructctions);
+        }
+
         public void CreateCookbook(string name, string author)
         {
             bookRepo.CreateCookBook(name, author);
