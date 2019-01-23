@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using RecipeLib.Application;
+using ReciWizGUI.Pages;
 
 namespace ReciWizGUI
 {
@@ -66,6 +67,17 @@ namespace ReciWizGUI
                 Button button = new RecipeButton((int)recipe["id"], (string)recipe["name"], LoadRecipe);
                 RecipePanel.Children.Add(button);
             }
+
+            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator);
+            RecipePanel.Children.Add(newButton);
+
+            LoadRecipeCreator(null, null);
+        }
+
+        public void LoadRecipeCreator(object sender, EventArgs e)
+        {
+            CreateRecipe recipeCreator = new CreateRecipe();
+            ViewHolder.Navigate(recipeCreator);
         }
 
         public void LoadRecipe(object sender, EventArgs e)
