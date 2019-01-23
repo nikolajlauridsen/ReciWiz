@@ -1,0 +1,28 @@
+﻿<Page x:Class="ReciWizGUI.CreateBookWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReciWizGUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="600"
+      Title="CreateRecipe" Background="LightGray">
+
+    <DockPanel  Margin="30,20,30,20" HorizontalAlignment="Left">
+        <Label FontSize="25" Padding="0,0,0,20" DockPanel.Dock="Top">Create recipe</Label>
+        <WrapPanel DockPanel.Dock="Top">
+            <Label>Cookbook name</Label>
+            <TextBox Width="200" Height="18" Background="Transparent" Name="BookName"></TextBox>
+        </WrapPanel>
+        <WrapPanel DockPanel.Dock="Top">
+            <Label>Author</Label>
+            <TextBox Width="200" Height="18" Background="Transparent" Name="Author"></TextBox>
+        </WrapPanel>
+        <WrapPanel>
+            <Button Name="CreateBtn">
+                Create
+            </Button>
+        </WrapPanel>
+
+    </DockPanel>
+</Page>

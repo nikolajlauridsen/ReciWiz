@@ -32,12 +32,22 @@ namespace ReciWizGUI
             RecipePanel.Children.Clear();
             BookPanel.Children.Clear();
             LoadBooks();
-
+            CreateBookWindow window = new CreateBookWindow(LoadBooks, controller);
+            ViewHolder.Navigate(window);
         }
 
 
         public void LoadBooks()
         {
+            foreach (Dictionary<string, object> book in controller.GetBooks()) {
+                Button button = new BookButton((int)book["id"], (string)book["name"], LoadRecipies);
+                button.Background = BookPanel.Background;
+                BookPanel.Children.Add(button);
+            }
+        }
+        public void LoadBooks(object sender, EventArgs e)
+        {
+            BookPanel.Children.Clear();
             foreach (Dictionary<string, object> book in controller.GetBooks()) {
                 Button button = new BookButton((int)book["id"], (string)book["name"], LoadRecipies);
                 button.Background = BookPanel.Background;
