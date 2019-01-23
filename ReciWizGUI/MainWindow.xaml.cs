@@ -54,7 +54,7 @@ namespace ReciWizGUI
         {
             CreateBookWindow window = new CreateBookWindow(LoadBooks, controller);
             RecipePanel.Children.Clear();
-            ViewHolder.Navigate(window);
+            Navigate(window);
         }
 
         public void LoadRecipies(object sender, EventArgs e)
@@ -90,14 +90,19 @@ namespace ReciWizGUI
         public void LoadRecipeCreator(object sender, EventArgs e)
         {
             CreateRecipe recipeCreator = new CreateRecipe(controller, chosenbook, LoadCurrentRecipies);
-            ViewHolder.Navigate(recipeCreator);
+            Navigate(recipeCreator);
         }
 
         public void LoadRecipe(object sender, EventArgs e)
         {
             RecipeButton senderButton = (RecipeButton)sender;
             RecipeViewer viewer = new RecipeViewer(controller.GetRecipe(chosenbook, senderButton.ID));
-            ViewHolder.Navigate(viewer);
+            Navigate(viewer);
+        }
+
+        private void Navigate(Page target) {
+            while (ViewHolder.NavigationService.RemoveBackEntry() != null) ;
+            ViewHolder.Navigate(target);
         }
     }
 }
