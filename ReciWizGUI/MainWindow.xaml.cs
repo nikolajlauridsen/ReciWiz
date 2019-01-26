@@ -24,12 +24,13 @@ namespace ReciWizGUI
     /// 
     public partial class MainWindow : Window
     {
-        Controller controller = new Controller();
+        Controller controller;
         private int chosenbook;
 
         public MainWindow()
         {
             InitializeComponent();
+            controller = Controller.GetInstance();
             RecipePanel.Children.Clear();
             BookPanel.Children.Clear();
             LoadBooks(null, null);
@@ -52,7 +53,7 @@ namespace ReciWizGUI
 
         public void ShowCreateBook(object sender, EventArgs e)
         {
-            CreateBookWindow window = new CreateBookWindow(LoadBooks, controller);
+            CreateBookWindow window = new CreateBookWindow(LoadBooks);
             RecipePanel.Children.Clear();
             Navigate(window);
         }
@@ -89,7 +90,7 @@ namespace ReciWizGUI
 
         public void LoadRecipeCreator(object sender, EventArgs e)
         {
-            CreateRecipe recipeCreator = new CreateRecipe(controller, chosenbook, LoadCurrentRecipies);
+            CreateRecipe recipeCreator = new CreateRecipe(chosenbook, LoadCurrentRecipies);
             Navigate(recipeCreator);
         }
 

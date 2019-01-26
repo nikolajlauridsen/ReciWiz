@@ -9,8 +9,23 @@ namespace RecipeLib.Application
 {
     public class Controller
     {
-        IngredientRepo ingredientRepo = new IngredientRepo();
-        CookbookRepo bookRepo = new CookbookRepo();
+        private static Controller instance;
+        IngredientRepo ingredientRepo;
+        CookbookRepo bookRepo;
+
+        private Controller()
+        {
+            ingredientRepo = new IngredientRepo();
+            bookRepo = new CookbookRepo();
+        }
+
+        public static Controller GetInstance()
+        {
+            if(instance == null) {
+                instance = new Controller();
+            }
+            return instance;
+        }
 
         // Create
         public void CreateRecipe(string cookbookname, string name, List<Dictionary<string, object>> ingredientsData, string instructctions) {

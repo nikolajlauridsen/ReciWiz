@@ -21,18 +21,16 @@ namespace ReciWizGUI
     /// </summary>
     public partial class CreateBookWindow : Page
     {
-        private Controller Control;
-        public CreateBookWindow(RoutedEventHandler listener, Controller control)
+        public CreateBookWindow(RoutedEventHandler listener)
         {
             InitializeComponent();
-            Control = control;
             CreateBtn.Click += CreateMethod;
             CreateBtn.Click += listener;
         }
 
         public void CreateMethod(object sender, EventArgs e)
         {
-            Control.CreateCookbook(BookName.Text, Author.Text);
+            Controller.GetInstance().CreateCookbook(BookName.Text, Author.Text);
         }
     }
 }
