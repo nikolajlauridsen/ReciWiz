@@ -10,16 +10,13 @@ namespace RecipeLib.Domain
 {
     public class CookbookRepo
     {
-        private readonly List<Cookbook> Books = new List<Cookbook>();
+        private readonly List<ICookbook> Books = new List<ICookbook>();
         private readonly IDB db;
 
         public CookbookRepo()
         {
             db = new LiteConnector();
-
-            foreach(Dictionary<string, object> bookData in db.GetCookBooks()) {
-                CreateCookBook((string)bookData["title"], (string)bookData["author"], (int)bookData["id"]);
-            }
+            Books = db.GetCookBooks();
         }
 
         public List<ICookbook> GetBooks() {

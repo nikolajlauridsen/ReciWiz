@@ -14,7 +14,7 @@ namespace RecipeLib.Persistence
 
         List<IingredientLine> GetIngredients(int recipeID);
 
-        List<Dictionary<string, object>> GetCookBooks();
+        List<ICookbook> GetCookBooks();
 
         List<IRecipe> GetRecipies(int cookBookID);
 

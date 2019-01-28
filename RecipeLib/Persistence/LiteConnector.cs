@@ -116,19 +116,15 @@ namespace RecipeLib.Persistence
             return data;
         }
 
-        public List<Dictionary<string, object>> GetCookBooks()
+        public List<ICookbook> GetCookBooks()
         {
-            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            List<ICookbook> data = new List<ICookbook>();
 
             conn.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(@"SELECT Title, Author, ID FROM COOKBOOK;", conn)) {
                 using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {
-                        Dictionary<string, object> context = new Dictionary<string, object>();
-                        context["title"] = reader["Title"];
-                        context["author"] = reader["Author"];
-                        context["id"] = Convert.ToInt32(reader["ID"]);
-                        data.Add(context);
+                        data.Add(new Cookbook(reader["Title"].ToString(), reader["Author"].ToString(), Convert.ToInt32(reader["ID"])));
                     }
                 }
 
