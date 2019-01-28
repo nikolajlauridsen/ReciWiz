@@ -45,9 +45,9 @@ namespace RecipeLib.Application
         }
 
         // Read
-        public Dictionary<string, object> GetRecipe(string cookbookname, string recipeName)
+        public IRecipe GetRecipe(string cookbookname, string recipeName)
         {
-            return bookRepo.GetBook(cookbookname).GetRecipeData(recipeName);
+            return bookRepo.GetBook(cookbookname).GetRecipe(recipeName);
         }
 
         public IRecipe GetRecipe(int bookID, int recipeID)
@@ -55,14 +55,14 @@ namespace RecipeLib.Application
             return bookRepo.GetBook(bookID).GetRecipe(recipeID);
         }
 
-        public List<Dictionary<string, object>> GetBooks()
+        public List<ICookbook> GetBooks()
         {
-            return bookRepo.GetBooksData();
+            return bookRepo.GetBooks();
         }
 
-        public List<Dictionary<string, object>> GetRecipies(int bookID)
+        public List<IRecipe> GetRecipies(int bookID)
         {
-            return bookRepo.GetBook(bookID).GetRecipeOverview();
+            return bookRepo.GetBook(bookID).GetRecipes();
         }
     }
 }

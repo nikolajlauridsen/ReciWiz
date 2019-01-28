@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RecipeLib.Persistence;
+using RecipeLib.Model;
 
 namespace RecipeLib.Domain
 {
@@ -19,6 +20,15 @@ namespace RecipeLib.Domain
             foreach(Dictionary<string, object> bookData in db.GetCookBooks()) {
                 CreateCookBook((string)bookData["title"], (string)bookData["author"], (int)bookData["id"]);
             }
+        }
+
+        public List<ICookbook> GetBooks() {
+            List <ICookbook> berks = new List<ICookbook>();
+            foreach(ICookbook book in Books) {
+                berks.Add(book);
+            }
+
+            return berks;
         }
 
         public Cookbook GetBook(string name)
@@ -55,13 +65,5 @@ namespace RecipeLib.Domain
             Books.Add(book);
         }
 
-        public List<Dictionary<string, object>> GetBooksData()
-        {
-            List<Dictionary<string, object>> bookData = new List<Dictionary<string, object>>();
-            foreach(Cookbook book in Books) {
-                bookData.Add(book.GetContext());
-            }
-            return bookData;
-        }
     }
 }

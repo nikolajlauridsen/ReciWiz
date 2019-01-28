@@ -29,18 +29,5 @@ namespace RecipeLib.Domain
             Ingredients.Add(ingredient);
         }
 
-        public Dictionary<string, object> GetContext()
-        {
-            Dictionary<string, object> context = new Dictionary<string, object>();
-            context["name"] = Title;
-            context["id"] = ID;
-            context["instructions"] = Instructions;
-            context["ingredients"] = new List<Dictionary<string, object>>();
-            foreach (IngredientLine ingredient in Ingredients) {
-                ((List<Dictionary<string, object>>)context["ingredients"]).Add(ingredient.GetContext());
-            }
-            return context;
-        }
-
     }
 }

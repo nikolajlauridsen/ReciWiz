@@ -8,7 +8,7 @@ using RecipeLib.Model;
 
 namespace RecipeLib.Domain
 {
-    public class Cookbook : ICookBook
+    public class Cookbook : ICookbook
     {
 
         public string Title { get; }
@@ -56,16 +56,13 @@ namespace RecipeLib.Domain
             return null;
         }
 
-        public Dictionary<string, object> GetRecipeData(string recipeName)
+        public List<IRecipe> GetRecipes()
         {
-            
-            Recipe recipe = GetRecipe(recipeName);
-            return recipe.GetContext() ;
-        }
-
-        public Dictionary<string, object> GetRecipeData(int recipeID)
-        {
-            return GetRecipe(recipeID).GetContext();
+            List<IRecipe> recipies = new List<IRecipe>();
+            foreach(IRecipe recipe in Recipies) {
+                recipies.Add(recipe);
+            }
+            return recipies;
         }
 
         public void CreateRecipe(string name, List<Dictionary<string, object>> ingredientsData, string instructions)
@@ -85,32 +82,6 @@ namespace RecipeLib.Domain
         public void AddRecipe(Recipe recipe)
         {
             Recipies.Add(recipe);
-        }
-
-        public Dictionary<string, object> GetContext()
-        {
-            Dictionary<string, object> context = new Dictionary<string, object>();
-
-            context["name"] = Title;
-            context["author"] = Author;
-            context["id"] = ID;
-
-            return context;
-        }
-
-        public List<Dictionary<string, object>> GetRecipeOverview()
-        {
-            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
-            foreach(Recipe recipe in Recipies) {
-                Dictionary<string, object> context = new Dictionary<string, object>();
-
-                context["name"] = recipe.Title;
-                context["id"] = recipe.ID;
-                data.Add(context);
-            }
-            
-
-            return data;
         }
 
         private List<IingredientLine> createIngredientLinesObjects(List<Dictionary<string, object>> ingredientsData)

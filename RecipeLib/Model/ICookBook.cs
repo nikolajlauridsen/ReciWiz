@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeLib.Model
 {
-    public interface ICookBook : IPersistable
+    public interface ICookbook : IPersistable
     {
         string Title { get; }
         string Author { get; }

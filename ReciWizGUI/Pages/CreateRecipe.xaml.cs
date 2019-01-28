@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ReciWizGUI.Widgets;
 using RecipeLib.Application;
+using RecipeLib.Model;
 
 namespace ReciWizGUI.Pages
 {

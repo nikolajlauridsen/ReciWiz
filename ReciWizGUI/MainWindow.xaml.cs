@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using RecipeLib.Application;
+using RecipeLib.Model;
+
 using ReciWizGUI.Pages;
 
 namespace ReciWizGUI
@@ -41,8 +43,8 @@ namespace ReciWizGUI
         {
             BookPanel.Children.Clear();
 
-            foreach (Dictionary<string, object> book in controller.GetBooks()) {
-                Button button = new BookButton((int)book["id"], (string)book["name"], LoadRecipies);
+            foreach (ICookbook book in controller.GetBooks()) {
+                Button button = new BookButton(book.ID, book.Title, LoadRecipies);
                 button.Background = BookPanel.Background;
                 BookPanel.Children.Add(button);
             }
@@ -64,8 +66,8 @@ namespace ReciWizGUI
             BookButton senderButton = (BookButton)sender;
             chosenbook = senderButton.ID;
             // Implement getRecipies and change books to that
-            foreach(Dictionary<string, object> recipe in controller.GetRecipies(senderButton.ID)) {
-                Button button = new RecipeButton((int)recipe["id"], (string)recipe["name"], LoadRecipe);
+            foreach(IRecipe recipe in controller.GetRecipies(senderButton.ID)) {
+                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe);
                 RecipePanel.Children.Add(button);
             }
 
@@ -79,8 +81,8 @@ namespace ReciWizGUI
         {
             RecipePanel.Children.Clear();
             // Implement getRecipies and change books to that
-            foreach (Dictionary<string, object> recipe in controller.GetRecipies(chosenbook)) {
-                Button button = new RecipeButton((int)recipe["id"], (string)recipe["name"], LoadRecipe);
+            foreach (IRecipe recipe in controller.GetRecipies(chosenbook)) {
+                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe);
                 RecipePanel.Children.Add(button);
             }
 

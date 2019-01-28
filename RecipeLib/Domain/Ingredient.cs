@@ -19,12 +19,5 @@ namespace RecipeLib.Domain
             ID = id;
         }
 
-        public Dictionary<string, object> GetContext()
-        {
-            Dictionary<string, object> context = new Dictionary<string, object>();
-            context["name"] = Name;
-            context["id"] = ID;
-            return context;
-        }
     }
 }
