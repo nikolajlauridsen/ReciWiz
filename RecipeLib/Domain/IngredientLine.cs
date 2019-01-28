@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RecipeLib.Model;
+
 namespace RecipeLib.Domain
 {
-    public class IngredientLine
+    public class IngredientLine : IingredientLine 
     {
-        public Ingredient Ingredient;
-        public double Quantity;
-        public string Unit;
+        public Iingredient Ingredient { get; }
+        public double Quantity { get; }
+        public string Unit { get; }
 
 		public IngredientLine(Ingredient ingredient,double quantity, string unit)
         {

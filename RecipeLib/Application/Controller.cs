@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using RecipeLib.Domain;
+using RecipeLib.Model;
 
 namespace RecipeLib.Application
 {
@@ -48,9 +50,9 @@ namespace RecipeLib.Application
             return bookRepo.GetBook(cookbookname).GetRecipeData(recipeName);
         }
 
-        public Dictionary<string, object> GetRecipe(int bookID, int recipeID)
+        public IRecipe GetRecipe(int bookID, int recipeID)
         {
-            return bookRepo.GetBook(bookID).GetRecipeData(recipeID);
+            return bookRepo.GetBook(bookID).GetRecipe(recipeID);
         }
 
         public List<Dictionary<string, object>> GetBooks()

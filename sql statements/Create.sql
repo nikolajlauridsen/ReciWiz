@@ -18,11 +18,11 @@ CREATE TABLE RECIPE(
 );
 
 
-
 CREATE TABLE INGREDIENT(
 	Name			TEXT		NOT NULL,
 	ID				INTEGER		PRIMARY KEY
 );
+
 
 CREATE TABLE INGREDIENTLINE(
 	RecipeID		INT					NOT NULL,
@@ -50,9 +50,9 @@ INSERT INTO COOKBOOK VALUES ("Mad", "Nikolaj Lauridsen", null);
 
 SELECT Title, Author, ID FROM COOKBOOK;
 
-INSERT INTO RECIPE VALUES ("Pandekager", "Ting", 1, null);
+INSERT INTO RECIPE VALUES ("@Name", "@Instructions", @BookID, null);
 INSERT INTO RECIPE VALUES ("Skysovs", "Ting", 1, null);
-SELECT Name, Directions, CookbookID, ID FROM RECIPE;
+SELECT Name, Directions, CookbookID, ID FROM RECIPE WHERE ID=1;
 
 INSERT INTO INGREDIENT VALUES ("Æg", null);
 INSERT INTO INGREDIENT VALUES ("Mælk", null);
@@ -70,7 +70,7 @@ ON IL.IngredientID = I.ID
 WHERE IL.RecipeID = (SELECT ID FROM RECIPE WHERE Name = "Pandekager");
 
 // Get ingredients by ID
-SELECT I.Name, IL.Quantity, IL.Unit FROM INGREDIENT AS I
-INNER JOIN INGREDIENTLINE AS IL
-ON IL.IngredientID = I.ID
-WHERE IL.RecipeID = 1;
+SELECT I.Name, IL.Quantity, IL.Unit FROM INGREDIENT AS I 
+INNER JOIN INGREDIENTLINE AS IL 
+ON IL.IngredientID = I.ID 
+WHERE IL.RecipeID = @ID;

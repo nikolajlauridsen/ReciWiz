@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RecipeLib.Model;
+
 namespace RecipeLib.Domain
 {
-    public class Ingredient
+    public class Ingredient : Iingredient
     {
-        public string Name;
-        public int ID;
+        public string Name { get; }
+        public int ID { get; }
 
         public Ingredient(string name, int id)
         {

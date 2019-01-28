@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using RecipeLib.Model;
+
 namespace ReciWizGUI
 {
     /// <summary>
@@ -20,22 +22,22 @@ namespace ReciWizGUI
     /// </summary>
     public partial class RecipeViewer : Page
     {
-        public RecipeViewer(Dictionary<string, object> recipeData)
+        public RecipeViewer(IRecipe recipe)
         {
             InitializeComponent();
-            LoadRecipe(recipeData);
+            LoadRecipe(recipe);
         }
 
-        private void LoadRecipe(Dictionary<string, object> recipeData)
+        private void LoadRecipe(IRecipe recipe)
         {
             IngredientList.Items.Clear();
             // Set name and instructions
-            RecipeName.Content = (string)recipeData["name"];
-            Instructions.Text = (string)recipeData["instructions"];
+            RecipeName.Content = recipe.Title;
+            Instructions.Text = recipe.Instructions;
             // Add ingredients
-            foreach (Dictionary<string, object> ingredientLine in (List<Dictionary<string, object>>)recipeData["ingredients"]) {
+            foreach (IingredientLine line in recipe.Ingredients){
                 ListViewItem ingredient = new ListViewItem();
-                ingredient.Content = $"{ingredientLine["quantity"]} {ingredientLine["unit"]} {ingredientLine["name"]}";
+                ingredient.Content = $"{line.Quantity} {line.Unit} {line.Ingredient.Name}";
                 IngredientList.Items.Add(ingredient);
             }
         }

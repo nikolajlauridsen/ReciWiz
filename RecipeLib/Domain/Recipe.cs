@@ -4,28 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RecipeLib.Model;
+
 namespace RecipeLib.Domain
 {
-    public class Recipe
+    public class Recipe : IRecipe
     {
-        public string Name;
-        public string Instructions;
-        public int ID;
+        public string Title { get; }
+        public string Instructions { get; }
+        public int ID { get; }
 
-        public List<IngredientLine> Ingredients { get; private set; }
+        public List<IingredientLine> Ingredients { get; private set; }
         
-        public Recipe(string name, string instructions, List<IngredientLine> ingredients, int id)
+        public Recipe(string name, string instructions, List<IingredientLine> ingredients, int id)
         {
             Ingredients = ingredients;
-            Name = name;
+            Title = name;
             Instructions = instructions;
             ID = id;
-        }
-
-
-        public Recipe(string name, string instructions): this(name, instructions, null, 0)
-        {
-            Ingredients = new List<IngredientLine>();
         }
 
         public void AddIngredient(IngredientLine ingredient)
@@ -36,7 +32,7 @@ namespace RecipeLib.Domain
         public Dictionary<string, object> GetContext()
         {
             Dictionary<string, object> context = new Dictionary<string, object>();
-            context["name"] = Name;
+            context["name"] = Title;
             context["id"] = ID;
             context["instructions"] = Instructions;
             context["ingredients"] = new List<Dictionary<string, object>>();

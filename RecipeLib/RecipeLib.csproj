@@ -64,6 +64,11 @@
     <Compile Include="Domain\CookbookRepo.cs" />
     <Compile Include="Domain\Ingredient.cs" />
     <Compile Include="Domain\IngredientRepo.cs" />
+    <Compile Include="Model\ICookBook.cs" />
+    <Compile Include="Model\Iingredient.cs" />
+    <Compile Include="Model\IingredientLine.cs" />
+    <Compile Include="Model\IRecipe.cs" />
+    <Compile Include="Model\IPersistable.cs" />
     <Compile Include="Persistence\IDB.cs" />
     <Compile Include="Persistence\LiteConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
