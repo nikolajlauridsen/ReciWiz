@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RecipeLib.Persistence;
+using RecipeLib.Model;
 
 namespace RecipeLib.Domain
 {
@@ -14,9 +15,8 @@ namespace RecipeLib.Domain
 
         public IngredientRepo()
         {
-            foreach(Dictionary<string, object> ingredientData in db.GetAllIngredients()) {
-                Ingredient ingridient = new Ingredient((string)ingredientData["name"], (int)ingredientData["id"]);
-                ingredients.Add(ingridient);
+            foreach(Ingredient ingredient in db.GetAllIngredients()) {
+                ingredients.Add(ingredient);
             }
         }
 

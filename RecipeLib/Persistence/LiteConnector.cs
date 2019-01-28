@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SQLite;
 
 using RecipeLib.Model;
+using RecipeLib.Domain;
 
 namespace RecipeLib.Persistence
 {
@@ -96,18 +97,15 @@ namespace RecipeLib.Persistence
             return recipeId;
         }
 
-        public List<Dictionary<string, object>> GetAllIngredients()
+        public List<Iingredient> GetAllIngredients()
         {
-            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            List<Iingredient> data = new List<Iingredient>();
             
             conn.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(@"SELECT Name, ID FROM INGREDIENT;", conn)) {
                 using(SQLiteDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {
-                        Dictionary<string, object> context = new Dictionary<string, object>();
-                        context["name"] = reader["Name"];
-                        context["id"] = Convert.ToInt32(reader["ID"]);
-                        data.Add(context);
+                        data.Add(new Ingredient(reader["Name"].ToString(), Convert.ToInt32(reader["ID"])));
                     }
                 }
 
@@ -140,23 +138,20 @@ namespace RecipeLib.Persistence
             return data;
         }
 
-        public List<Dictionary<string, object>> GetIngredients(int recipeID)
+        public List<IingredientLine> GetIngredients(int recipeID)
         {
-            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            List<IingredientLine> data = new List<IingredientLine>();
 
             conn.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
-                cmd.CommandText = @"SELECT I.Name, IL.Quantity, IL.Unit FROM INGREDIENT AS I INNER JOIN INGREDIENTLINE AS IL ON IL.IngredientID = I.ID WHERE IL.RecipeID = @ID;";
+                cmd.CommandText = @"SELECT I.Name, I.ID, IL.Quantity, IL.Unit FROM INGREDIENT AS I INNER JOIN INGREDIENTLINE AS IL ON IL.IngredientID = I.ID WHERE IL.RecipeID = @ID;";
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Add(new SQLiteParameter("@ID", recipeID));
 
                 using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {
-                        Dictionary<string, object> context = new Dictionary<string, object>();
-                        context["name"] = reader["Name"];
-                        context["quantity"] = reader["Quantity"];
-                        context["unit"] = reader["Unit"];
-                        data.Add(context);
+                        Ingredient ingredient = new Ingredient(reader["Name"].ToString(), Convert.ToInt32(reader["ID"]));
+                        data.Add( new IngredientLine(ingredient, Convert.ToDouble(reader["Quantity"]), reader["unit"].ToString()));
                     }
                 }
 
@@ -166,28 +161,26 @@ namespace RecipeLib.Persistence
             return data;
         }
 
-        public List<Dictionary<string, object>> GetRecipies(int CookBookID)
+        public List<IRecipe> GetRecipies(int CookBookID)
         {
-            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
+            List<IRecipe> data = new List<IRecipe>();
             // get main data
             conn.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(@"SELECT Name, Directions, ID FROM RECIPE WHERE CookbookID=@bookId;", conn)) {
                 cmd.Parameters.Add(new SQLiteParameter("@bookId", CookBookID));
                 using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {
-                        Dictionary<string, object> context = new Dictionary<string, object>();
-                        context["name"] = reader["Name"];
-                        context["directions"] = reader["Directions"];
-                        context["id"] = Convert.ToInt32(reader["ID"]);
-                        data.Add(context);
+                        data.Add(new Recipe(reader["Name"].ToString(), reader["Directions"].ToString(), Convert.ToInt32(reader["ID"])));
                     }
                 }
 
             }
             conn.Close();
 
-            foreach(Dictionary<string, object> context in data) {
-                context["ingredients"] = GetIngredients((int)context["id"]);
+            foreach(Recipe recipe in data) {
+                foreach(IngredientLine line in GetIngredients(recipe.ID)){
+                    recipe.AddIngredient(line);
+                }
             }
 
             return data;

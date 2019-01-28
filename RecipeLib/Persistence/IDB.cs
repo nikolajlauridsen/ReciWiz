@@ -10,13 +10,13 @@ namespace RecipeLib.Persistence
 {
     public interface IDB
     {
-        List<Dictionary<string, object>> GetAllIngredients();
+        List<Iingredient> GetAllIngredients();
 
-        List<Dictionary<string, object>> GetIngredients(int recipeID);
+        List<IingredientLine> GetIngredients(int recipeID);
 
         List<Dictionary<string, object>> GetCookBooks();
 
-        List<Dictionary<string, object>> GetRecipies(int cookBookID);
+        List<IRecipe> GetRecipies(int cookBookID);
 
         // Returns their ID
         int CreateIngredient(string name);

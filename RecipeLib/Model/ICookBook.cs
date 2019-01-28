@@ -10,6 +10,5 @@ namespace RecipeLib.Model
     {
         string Title { get; }
         string Author { get; }
-
     }
 }

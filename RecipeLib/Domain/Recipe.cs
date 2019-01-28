@@ -24,6 +24,11 @@ namespace RecipeLib.Domain
             ID = id;
         }
 
+        public Recipe(string name, string instructions, int id) : this(name, instructions, new List<IingredientLine>(), id)
+        {
+            
+        }
+
         public void AddIngredient(IngredientLine ingredient)
         {
             Ingredients.Add(ingredient);
