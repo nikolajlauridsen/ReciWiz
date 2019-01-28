@@ -30,10 +30,6 @@ namespace RecipeLib.Application
         }
 
         // Create
-        public void CreateRecipe(string cookbookname, string name, List<IingredientLine> ingredientsData, string instructctions) {
-            bookRepo.GetBook(cookbookname).CreateRecipe(name, ingredientsData, instructctions);
-        }
-
         public void CreateRecipe(int cookbookID, string name, List<IingredientLine> ingredients, string instructctions)
         {
             bookRepo.GetBook(cookbookID).CreateRecipe(name, ingredients, instructctions);
@@ -49,11 +45,6 @@ namespace RecipeLib.Application
         }
 
         // Read
-        public IRecipe GetRecipe(string cookbookname, string recipeName)
-        {
-            return bookRepo.GetBook(cookbookname).GetRecipe(recipeName);
-        }
-
         public IRecipe GetRecipe(int bookID, int recipeID)
         {
             return bookRepo.GetBook(bookID).GetRecipe(recipeID);
