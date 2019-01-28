@@ -29,6 +29,12 @@ namespace RecipeLib.Domain
 
             return i;
         }
+
+        public IngredientLine CreateIngredientLine(string name, double quantity, string unit)
+        {
+            Ingredient ingredient = GetIngredient(name);
+            return new IngredientLine(ingredient, quantity, unit);
+        }
         
         public Ingredient FindIngredient(string name)
         {

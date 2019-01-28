@@ -30,18 +30,22 @@ namespace RecipeLib.Application
         }
 
         // Create
-        public void CreateRecipe(string cookbookname, string name, List<Dictionary<string, object>> ingredientsData, string instructctions) {
+        public void CreateRecipe(string cookbookname, string name, List<IingredientLine> ingredientsData, string instructctions) {
             bookRepo.GetBook(cookbookname).CreateRecipe(name, ingredientsData, instructctions);
         }
 
-        public void CreateRecipe(int cookbookID, string name, List<Dictionary<string, object>> ingredientsData, string instructctions)
+        public void CreateRecipe(int cookbookID, string name, List<IingredientLine> ingredients, string instructctions)
         {
-            bookRepo.GetBook(cookbookID).CreateRecipe(name, ingredientsData, instructctions);
+            bookRepo.GetBook(cookbookID).CreateRecipe(name, ingredients, instructctions);
         }
 
         public void CreateCookbook(string name, string author)
         {
             bookRepo.CreateCookBook(name, author);
+        }
+
+        public IingredientLine CreateIngredientLine(string name, double quantity, string unit) {
+            return ingredientRepo.CreateIngredientLine(name, quantity, unit);
         }
 
         // Read

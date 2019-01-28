@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
 
+using RecipeLib.Model;
+
 namespace RecipeLib.Persistence
 {
     public class LiteConnector : IDB
@@ -60,7 +62,7 @@ namespace RecipeLib.Persistence
             return rowId;
         }
 
-        public int CreateRecipe(int cookBookId, string recipeName, List<Dictionary<string, object>> ingredientsData, string instructions)
+        public int CreateRecipe(int cookBookId, string recipeName, List<IingredientLine> ingredientsData, string instructions)
         {
             int recipeId;
 
@@ -78,14 +80,14 @@ namespace RecipeLib.Persistence
             recipeId = Convert.ToInt32(conn.LastInsertRowId);
 
             // Innsert ingredientlines
-            foreach(Dictionary<string, object> ingredientData in ingredientsData) {
+            foreach(IingredientLine ingredientData in ingredientsData) {
                 using (SQLiteCommand cmd = new SQLiteCommand(conn)) {
                     cmd.CommandText = @"INSERT INTO INGREDIENTLINE (RecipeID, IngredientID, Quantity, Unit, ID) VALUES(@recipeID, @ingredientID, @quantity, @unit, null)";
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Add(new SQLiteParameter("@recipeID", recipeId));
-                    cmd.Parameters.Add(new SQLiteParameter("@ingredientId", ingredientData["id"]));
-                    cmd.Parameters.Add(new SQLiteParameter("@quantity", ingredientData["quantity"]));
-                    cmd.Parameters.Add(new SQLiteParameter("@unit", ingredientData["unit"]));
+                    cmd.Parameters.Add(new SQLiteParameter("@ingredientId", ingredientData.Ingredient.ID));
+                    cmd.Parameters.Add(new SQLiteParameter("@quantity", ingredientData.Quantity));
+                    cmd.Parameters.Add(new SQLiteParameter("@unit", ingredientData.Unit));
                     cmd.ExecuteNonQuery();
                 }
             }

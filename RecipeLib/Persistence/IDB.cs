@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RecipeLib.Model;
+
 namespace RecipeLib.Persistence
 {
     public interface IDB
@@ -22,6 +24,6 @@ namespace RecipeLib.Persistence
         int CreateCookbook(string name, string author);
 
         int CreateRecipe(int cookBookId, string recipeName,
-            List<Dictionary<string, object>> ingredientsData, string instructions);
+            List<IingredientLine> ingredientsData, string instructions);
     }
 }

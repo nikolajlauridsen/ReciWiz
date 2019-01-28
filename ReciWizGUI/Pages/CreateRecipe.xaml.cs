@@ -48,9 +48,9 @@ namespace ReciWizGUI.Pages
         private void createRecipe(object sender, EventArgs e)
         {
             // Pack ingredient data
-            List<Dictionary<string, object>> ingredientData = new List<Dictionary<string, object>>();
+            List<IingredientLine> ingredients = new List<IingredientLine>();
             foreach(UIElement ingredient in IngredientContainer.Children) {
-                ingredientData.Add(((IngredientInput)ingredient).GetIngredientData());
+                ingredients.Add(((IngredientInput)ingredient).GetIngredientLine());
             }
 
             TextRange instructions = new TextRange(
@@ -58,7 +58,7 @@ namespace ReciWizGUI.Pages
                     Instructions.Document.ContentEnd
                 );
 
-            Controller.GetInstance().CreateRecipe(BookID, RecipeName.Text, ingredientData, instructions.Text);
+            Controller.GetInstance().CreateRecipe(BookID, RecipeName.Text, ingredients, instructions.Text);
         }
 
     }

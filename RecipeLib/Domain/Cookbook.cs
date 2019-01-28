@@ -65,17 +65,11 @@ namespace RecipeLib.Domain
             return recipies;
         }
 
-        public void CreateRecipe(string name, List<Dictionary<string, object>> ingredientsData, string instructions)
+        public void CreateRecipe(string name, List<IingredientLine> ingredientsData, string instructions)
         {
-            // Create ingredient lines
-            List<IingredientLine> ingredients = createIngredientLinesObjects(ingredientsData);
-            ingredientsData = new List<Dictionary<string, object>>();
-            foreach(IngredientLine ingredient in ingredients) {
-                ingredientsData.Add(ingredient.GetContext());
-            }
 
             int recipeID = db.CreateRecipe(ID, name, ingredientsData, instructions);
-            Recipe recipe = new Recipe(name, instructions, ingredients, recipeID);
+            Recipe recipe = new Recipe(name, instructions, ingredientsData, recipeID);
             Recipies.Add(recipe);
         }
 

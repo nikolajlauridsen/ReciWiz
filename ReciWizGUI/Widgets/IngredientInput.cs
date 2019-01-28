@@ -6,41 +6,41 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
+using RecipeLib.Application;
+using RecipeLib.Model;
+
 namespace ReciWizGUI.Widgets
 {
     public partial class IngredientInput : WrapPanel
     {
-        public Dictionary<string, TextBox> ingredients = new Dictionary<string, TextBox>();
+        public Dictionary<string, TextBox> ingredient = new Dictionary<string, TextBox>();
 
         public IngredientInput()
         {
             this.Margin = new Thickness(0,0,0,10);
   
-            ingredients["quantity"] = new TextBox();
-            ingredients["unit"] = new TextBox();
-            ingredients["name"] = new TextBox();
+            ingredient["quantity"] = new TextBox();
+            ingredient["unit"] = new TextBox();
+            ingredient["name"] = new TextBox();
 
-            ingredients["quantity"].Text = "Quantity";
-            ingredients["unit"].Text = "Unit";
-            ingredients["name"].Text = "Name";
+            ingredient["quantity"].Text = "Quantity";
+            ingredient["unit"].Text = "Unit";
+            ingredient["name"].Text = "Name";
 
 
 
-            foreach (TextBox box in ingredients.Values) {
+            foreach (TextBox box in ingredient.Values) {
                 box.Width = 70;
                 box.Margin = new Thickness(0, 0, 10, 0);
                 this.Children.Add(box);
             }
         }
 
-        public Dictionary<string, object> GetIngredientData()
+        public IingredientLine GetIngredientLine()
         {
-            Dictionary<string, object> context = new Dictionary<string, object>();
-            context["name"] = ingredients["name"].Text;
-            context["quantity"] = double.Parse(ingredients["quantity"].Text);
-            context["unit"] = ingredients["unit"].Text;
+            double quantity = Double.Parse(ingredient["quantity"].Text);
 
-            return context;
+            return Controller.GetInstance().CreateIngredientLine(ingredient["name"].Text, quantity, ingredient["unit"].Text);
         }
 
     }
