@@ -25,5 +25,8 @@ namespace RecipeLib.Persistence
 
         int CreateRecipe(int cookBookId, string recipeName,
             List<IingredientLine> ingredientsData, string instructions);
+
+        // Delete 
+        void DeleteCookbook(int cookbookID);
     }
 }

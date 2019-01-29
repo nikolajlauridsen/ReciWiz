@@ -181,5 +181,15 @@ namespace RecipeLib.Persistence
 
             return data;
         }
+
+        public void DeleteCookbook(int cookbookID)
+        {
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM COOKBOOK WHERE ID=@bookID", conn)) {
+                cmd.Parameters.Add(new SQLiteParameter("@bookID", cookbookID));
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+        }
     }
 }

@@ -44,12 +44,12 @@ namespace ReciWizGUI
             BookPanel.Children.Clear();
 
             foreach (ICookbook book in controller.GetBooks()) {
-                Button button = new BookButton(book.ID, book.Title, LoadRecipies);
+                Button button = new BookButton(book.ID, book.Title, LoadRecipies, LoadBooks);
                 button.Background = BookPanel.Background;
                 BookPanel.Children.Add(button);
             }
 
-            BookButton addButton = new BookButton(0, "New book", ShowCreateBook);
+            BookButton addButton = new BookButton(0, "New book", ShowCreateBook, LoadBooks);
             BookPanel.Children.Add(addButton);
         }
 

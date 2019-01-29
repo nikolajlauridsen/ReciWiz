@@ -50,6 +50,13 @@ namespace RecipeLib.Domain
             return null;
         }
 
+        public void DeleteCookBook(int bookId)
+        {
+            Cookbook selectedBook = GetBook(bookId);
+            Books.Remove(selectedBook);
+            db.DeleteCookbook(bookId);
+        }
+
         public void CreateCookBook(string name, string author)
         {
             int bookID = db.CreateCookbook(name, author);
@@ -61,6 +68,5 @@ namespace RecipeLib.Domain
             Cookbook book = new Cookbook(name, author, id);
             Books.Add(book);
         }
-
     }
 }

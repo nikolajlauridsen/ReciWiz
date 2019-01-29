@@ -10,7 +10,7 @@ namespace ReciWiz
 {
     class Menu
     {
-        private Controller control = new Controller();
+        private Controller control = Controller();
         private SmartMenu menu;
 
         public Menu()
