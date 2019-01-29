@@ -107,7 +107,8 @@ namespace ReciWizGUI
         {
             RecipeButton btn = (RecipeButton)sender;
             controller.DeleteRecipe(chosenbook, btn.ID);
-            ShowCreateBook(null, null);
+            LoadRecipeCreator(null, null);
+            LoadCurrentRecipies(null, null);
         }
 
         private void Navigate(Page target) {
