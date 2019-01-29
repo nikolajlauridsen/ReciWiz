@@ -67,11 +67,11 @@ namespace ReciWizGUI
             chosenbook = senderButton.ID;
             // Implement getRecipies and change books to that
             foreach(IRecipe recipe in controller.GetRecipies(senderButton.ID)) {
-                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe);
+                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe);
                 RecipePanel.Children.Add(button);
             }
 
-            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator);
+            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator, DeleteRecipe);
             RecipePanel.Children.Add(newButton);
 
             LoadRecipeCreator(null, null);
@@ -82,11 +82,11 @@ namespace ReciWizGUI
             RecipePanel.Children.Clear();
             // Implement getRecipies and change books to that
             foreach (IRecipe recipe in controller.GetRecipies(chosenbook)) {
-                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe);
+                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe);
                 RecipePanel.Children.Add(button);
             }
 
-            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator);
+            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator, DeleteRecipe);
             RecipePanel.Children.Add(newButton);
         }
 
@@ -101,6 +101,13 @@ namespace ReciWizGUI
             RecipeButton senderButton = (RecipeButton)sender;
             RecipeViewer viewer = new RecipeViewer(controller.GetRecipe(chosenbook, senderButton.ID));
             Navigate(viewer);
+        }
+        
+        public void DeleteRecipe(object sender, EventArgs e)
+        {
+            RecipeButton btn = (RecipeButton)sender;
+            controller.DeleteRecipe(chosenbook, btn.ID);
+            ShowCreateBook(null, null);
         }
 
         private void Navigate(Page target) {

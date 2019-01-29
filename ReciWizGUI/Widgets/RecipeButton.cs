@@ -12,12 +12,31 @@ namespace ReciWizGUI
 {
     public partial class RecipeButton : IDButton
     {
-        public RecipeButton(int id, string name, RoutedEventHandler handler) : base(id, name, handler)
+        private RoutedEventHandler DeleteHandler;
+        public RecipeButton(int id, string name, RoutedEventHandler handler, RoutedEventHandler deleteHandler) : base(id, name, handler)
         {
+            this.DeleteHandler = deleteHandler;
             this.Width = 200;
             this.Height = 25;
             this.BorderThickness = new Thickness(0, 0, 1, 1);
             this.Background = Brushes.Transparent;
+
+            ContextMenu menu = new ContextMenu();
+            MenuItem deleteOption = new MenuItem {
+                Header = "Delete"
+            };
+            deleteOption.Click += deleteSelf;
+            menu.Items.Add(deleteOption);
+            this.ContextMenu = menu;
+        }
+
+        private void deleteSelf(object sender, RoutedEventArgs e)
+        {
+            string msg = $"Are you sure you want to delete {this.Content}?";
+            MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes) {
+                DeleteHandler(this, e);
+            }
         }
     }
 }

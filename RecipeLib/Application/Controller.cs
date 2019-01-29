@@ -65,5 +65,10 @@ namespace RecipeLib.Application
         {
             bookRepo.DeleteCookBook(bookID);
         }
+
+        public void DeleteRecipe(int bookID, int recipeID)
+        {
+            bookRepo.GetBook(bookID).DeleteRecipe(recipeID);
+        }
     }
 }

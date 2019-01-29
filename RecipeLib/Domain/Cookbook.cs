@@ -60,5 +60,13 @@ namespace RecipeLib.Domain
         {
             Recipies.Add(recipe);
         }
+
+        public void DeleteRecipe(int recipeID)
+        {
+            Recipe reci = GetRecipe(recipeID);
+            db.DeleteRecipe(recipeID);
+            Recipies.Remove(reci);
+
+        }
     }
 }

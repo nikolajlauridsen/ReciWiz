@@ -191,5 +191,15 @@ namespace RecipeLib.Persistence
             }
             conn.Close();
         }
+
+        public void DeleteRecipe(int recipeID)
+        {
+            conn.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM RECIPE WHERE ID=@recipeID", conn)) {
+                cmd.Parameters.Add(new SQLiteParameter("@recipeID", recipeID));
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+        }
     }
 }

@@ -28,5 +28,7 @@ namespace RecipeLib.Persistence
 
         // Delete 
         void DeleteCookbook(int cookbookID);
+
+        void DeleteRecipe(int recipeID);
     }
 }
