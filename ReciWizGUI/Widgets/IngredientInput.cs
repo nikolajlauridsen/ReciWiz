@@ -14,6 +14,7 @@ namespace ReciWizGUI.Widgets
     public partial class IngredientInput : WrapPanel
     {
         public Dictionary<string, TextBox> ingredient = new Dictionary<string, TextBox>();
+        private string[] Clearable = { "Quantity", "Unit", "Name" };
 
         public IngredientInput()
         {
@@ -22,6 +23,7 @@ namespace ReciWizGUI.Widgets
             ingredient["quantity"] = new TextBox { Text = "Quantity" };
             ingredient["unit"] = new TextBox { Text = "Unit" };
             ingredient["name"] = new TextBox { Text = "Name" };
+            
 
             foreach (TextBox box in ingredient.Values) {
                 box.Width = 70;
@@ -41,7 +43,14 @@ namespace ReciWizGUI.Widgets
         public void ClearText(object sender, RoutedEventArgs e)
         {
             TextBox self = (TextBox)sender;
-            self.Clear();
+            if (Clearable.Contains(self.Text)){
+                self.Clear();
+            }   
+        }
+
+        public void Select()
+        {
+            ingredient["quantity"].Focus();
         }
 
     }
