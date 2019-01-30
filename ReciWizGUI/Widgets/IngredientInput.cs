@@ -24,8 +24,11 @@ namespace ReciWizGUI.Widgets
             ingredient["name"] = new TextBox();
 
             ingredient["quantity"].Text = "Quantity";
+            ingredient["quantity"].GotFocus += ClearText;
             ingredient["unit"].Text = "Unit";
+            ingredient["unit"].GotFocus += ClearText;
             ingredient["name"].Text = "Name";
+            ingredient["name"].GotFocus += ClearText;
 
 
 
@@ -41,6 +44,12 @@ namespace ReciWizGUI.Widgets
             double quantity = Double.Parse(ingredient["quantity"].Text);
 
             return Controller.GetInstance().CreateIngredientLine(ingredient["name"].Text, quantity, ingredient["unit"].Text);
+        }
+
+        public void ClearText(object sender, RoutedEventArgs e)
+        {
+            TextBox self = (TextBox)sender;
+            self.Clear();
         }
 
     }
