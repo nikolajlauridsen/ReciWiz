@@ -17,25 +17,17 @@ namespace ReciWizGUI.Widgets
 
         public IngredientInput()
         {
-            this.Margin = new Thickness(0,0,0,10);
-  
-            ingredient["quantity"] = new TextBox();
-            ingredient["unit"] = new TextBox();
-            ingredient["name"] = new TextBox();
+            this.Margin = new Thickness(0, 0, 0, 10);
 
-            ingredient["quantity"].Text = "Quantity";
-            ingredient["quantity"].GotFocus += ClearText;
-            ingredient["unit"].Text = "Unit";
-            ingredient["unit"].GotFocus += ClearText;
-            ingredient["name"].Text = "Name";
-            ingredient["name"].GotFocus += ClearText;
-
-
+            ingredient["quantity"] = new TextBox { Text = "Quantity" };
+            ingredient["unit"] = new TextBox { Text = "Unit" };
+            ingredient["name"] = new TextBox { Text = "Name" };
 
             foreach (TextBox box in ingredient.Values) {
                 box.Width = 70;
                 box.Margin = new Thickness(0, 0, 10, 0);
                 this.Children.Add(box);
+                box.GotFocus += ClearText;
             }
         }
 
