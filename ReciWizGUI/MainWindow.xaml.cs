@@ -26,25 +26,25 @@ namespace ReciWizGUI
     /// 
     public partial class MainWindow : Window
     {
-        Controller controller;
-        private int chosenbook;
+        readonly Controller _controller;
+        private int _chosenBook;
 
         public MainWindow()
         {
             InitializeComponent();
-            controller = Controller.GetInstance();
+            _controller = Controller.GetInstance();
             RecipePanel.Children.Clear();
             BookPanel.Children.Clear();
             LoadBooks(null, null);
             ShowCreateBook(null, null);
         }
 
-        public void LoadBooks(object sender, EventArgs e)
+        private void LoadBooks(object sender, EventArgs e)
         {
             BookPanel.Children.Clear();
 
-            foreach (ICookbook book in controller.GetBooks()) {
-                Button button = new BookButton(book.ID, book.Title, LoadRecipies, LoadBooks);
+            foreach (ICookbook book in _controller.GetBooks()) {
+                Button button = new BookButton(book.ID, book.Title, LoadRecipes, LoadBooks);
                 button.Background = BookPanel.Background;
                 BookPanel.Children.Add(button);
             }
@@ -53,20 +53,20 @@ namespace ReciWizGUI
             BookPanel.Children.Add(addButton);
         }
 
-        public void ShowCreateBook(object sender, EventArgs e)
+        private void ShowCreateBook(object sender, EventArgs e)
         {
             CreateBookWindow window = new CreateBookWindow(LoadBooks);
             RecipePanel.Children.Clear();
             Navigate(window);
         }
 
-        public void LoadRecipies(object sender, EventArgs e)
+        private void LoadRecipes(object sender, EventArgs e)
         {
             RecipePanel.Children.Clear();
             BookButton senderButton = (BookButton)sender;
-            chosenbook = senderButton.ID;
-            // Implement getRecipies and change books to that
-            foreach(IRecipe recipe in controller.GetRecipies(senderButton.ID)) {
+            _chosenBook = senderButton.ID;
+            // Implement getRecipes and change books to that
+            foreach(IRecipe recipe in _controller.GetRecipies(senderButton.ID)) {
                 Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe);
                 RecipePanel.Children.Add(button);
             }
@@ -77,11 +77,10 @@ namespace ReciWizGUI
             LoadRecipeCreator(null, null);
         }
 
-        public void LoadCurrentRecipies(object sender, EventArgs e)
+        private void LoadCurrentRecipes(object sender, EventArgs e)
         {
             RecipePanel.Children.Clear();
-            // Implement getRecipies and change books to that
-            foreach (IRecipe recipe in controller.GetRecipies(chosenbook)) {
+            foreach (IRecipe recipe in _controller.GetRecipies(_chosenBook)) {
                 Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe);
                 RecipePanel.Children.Add(button);
             }
@@ -90,29 +89,29 @@ namespace ReciWizGUI
             RecipePanel.Children.Add(newButton);
         }
 
-        public void LoadRecipeCreator(object sender, EventArgs e)
+        private void LoadRecipeCreator(object sender, EventArgs e)
         {
-            CreateRecipe recipeCreator = new CreateRecipe(chosenbook, LoadCurrentRecipies);
+            CreateRecipe recipeCreator = new CreateRecipe(_chosenBook, LoadCurrentRecipes);
             Navigate(recipeCreator);
         }
 
-        public void LoadRecipe(object sender, EventArgs e)
+        private void LoadRecipe(object sender, EventArgs e)
         {
             RecipeButton senderButton = (RecipeButton)sender;
-            RecipeViewer viewer = new RecipeViewer(controller.GetRecipe(chosenbook, senderButton.ID));
+            RecipeViewer viewer = new RecipeViewer(_controller.GetRecipe(_chosenBook, senderButton.ID));
             Navigate(viewer);
         }
-        
-        public void DeleteRecipe(object sender, EventArgs e)
+
+        private void DeleteRecipe(object sender, EventArgs e)
         {
             RecipeButton btn = (RecipeButton)sender;
-            controller.DeleteRecipe(chosenbook, btn.ID);
+            _controller.DeleteRecipe(_chosenBook, btn.ID);
             LoadRecipeCreator(null, null);
-            LoadCurrentRecipies(null, null);
+            LoadCurrentRecipes(null, null);
         }
 
         private void Navigate(Page target) {
-            while (ViewHolder.NavigationService.RemoveBackEntry() != null) ;
+            while (ViewHolder.NavigationService.RemoveBackEntry() != null);
             ViewHolder.Navigate(target);
         }
     }

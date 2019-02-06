@@ -28,7 +28,7 @@ namespace ReciWizGUI
             CreateBtn.Click += listener;
         }
 
-        public void CreateMethod(object sender, EventArgs e)
+        private void CreateMethod(object sender, EventArgs e)
         {
             Controller.GetInstance().CreateCookbook(BookName.Text, Author.Text);
         }

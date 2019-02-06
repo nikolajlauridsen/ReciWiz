@@ -31,7 +31,7 @@ namespace ReciWizGUI
             this.ContextMenu = menu;
         }
 
-        public void DeleteClick(object sender, RoutedEventArgs e)
+        private void DeleteClick(object sender, RoutedEventArgs e)
         {
             string msg = $"Are you sure you want to delete {this.Content}?";
             MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);

@@ -23,12 +23,12 @@ namespace ReciWizGUI.Pages
     /// </summary>
     public partial class CreateRecipe : Page
     {
-        private int BookID;
+        private readonly int _bookId;
 
         public CreateRecipe(int bookID, RoutedEventHandler listener)
         {
             InitializeComponent();
-            BookID = bookID;
+            _bookId = bookID;
 
             IngredientContainer.Children.Clear();
 
@@ -40,7 +40,7 @@ namespace ReciWizGUI.Pages
             this.KeyDown += OnKey;
         }
 
-        public void IngredientAdd(object sender, EventArgs e)
+        private void IngredientAdd(object sender, EventArgs e)
         {
             IngredientContainer.Children.Add(new IngredientInput());
         }
@@ -58,7 +58,7 @@ namespace ReciWizGUI.Pages
                     Instructions.Document.ContentEnd
                 );
 
-            Controller.GetInstance().CreateRecipe(BookID, RecipeName.Text, ingredients, instructions.Text);
+            Controller.GetInstance().CreateRecipe(_bookId, RecipeName.Text, ingredients, instructions.Text);
         }
 
         private void OnKey(object sender, KeyEventArgs e)
