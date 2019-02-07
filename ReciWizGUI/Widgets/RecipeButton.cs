@@ -32,11 +32,7 @@ namespace ReciWizGUI
 
         private void DeleteSelf(object sender, RoutedEventArgs e)
         {
-            string msg = $"Are you sure you want to delete {this.Content}?";
-            MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes) {
-                _deleteHandler(this, e);
-            }
+            _deleteHandler(this, e);
         }
     }
 }

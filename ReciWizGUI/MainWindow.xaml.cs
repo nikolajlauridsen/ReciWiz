@@ -105,9 +105,14 @@ namespace ReciWizGUI
         private void DeleteRecipe(object sender, EventArgs e)
         {
             RecipeButton btn = (RecipeButton)sender;
-            _controller.DeleteRecipe(_chosenBook, btn.ID);
-            LoadRecipeCreator(null, null);
-            LoadCurrentRecipes(null, null);
+            string msg = $"Are you sure you want to delete {btn.Content}?";
+            MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes) {
+                _controller.DeleteRecipe(_chosenBook, btn.ID);
+                LoadRecipeCreator(null, null);
+                LoadCurrentRecipes(null, null);
+            }
+            
         }
 
         private void DeleteBook(object sender, EventArgs e)
