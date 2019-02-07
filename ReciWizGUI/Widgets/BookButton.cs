@@ -13,7 +13,9 @@ namespace ReciWizGUI
 {
     public partial class BookButton : IDButton
     {
-        public BookButton(int id, string name, RoutedEventHandler handler, RoutedEventHandler reloadHandler) : base(id, name, handler)
+        private RoutedEventHandler _deleteClick;
+
+        public BookButton(int id, string name, RoutedEventHandler onClickHandler, RoutedEventHandler deleteHandler) : base(id, name, onClickHandler)
         {
             this.Width = 200;
             this.Height = 50;
@@ -21,23 +23,18 @@ namespace ReciWizGUI
             this.BorderBrush = Brushes.Black;
             this.Background = Brushes.Transparent;
             this.FontSize = 16;
+            _deleteClick = deleteHandler;
 
             ContextMenu menu = new ContextMenu();
-            MenuItem deleteOption = new MenuItem();
-            deleteOption.Header = "Delete";
+            MenuItem deleteOption = new MenuItem {Header = "Delete"};
             deleteOption.Click += DeleteClick;
-            deleteOption.Click += reloadHandler;
             menu.Items.Add(deleteOption);
             this.ContextMenu = menu;
         }
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            string msg = $"Are you sure you want to delete {this.Content}?";
-            MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);
-            if(messageBoxResult == MessageBoxResult.Yes) {
-                Controller.GetInstance().DeleteBook(this.ID);
-            }
+            _deleteClick(this, e);
         }
     }
 }

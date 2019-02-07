@@ -12,11 +12,11 @@ namespace ReciWizGUI
     {
         public int ID;
 
-        public IDButton(int id, string name, RoutedEventHandler handler)
+        public IDButton(int id, string name, RoutedEventHandler onClickHandler)
         {
             this.ID = id;
 
-            this.Click += handler;
+            this.Click += onClickHandler;
             this.Content = name;
         }
         public IDButton(int id, string name)

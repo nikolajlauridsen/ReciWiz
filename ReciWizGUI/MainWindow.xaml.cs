@@ -44,7 +44,7 @@ namespace ReciWizGUI
             BookPanel.Children.Clear();
 
             foreach (ICookbook book in _controller.GetBooks()) {
-                Button button = new BookButton(book.ID, book.Title, LoadRecipes, LoadBooks);
+                Button button = new BookButton(book.ID, book.Title, LoadRecipes, DeleteBook);
                 button.Background = BookPanel.Background;
                 BookPanel.Children.Add(button);
             }
@@ -108,6 +108,18 @@ namespace ReciWizGUI
             _controller.DeleteRecipe(_chosenBook, btn.ID);
             LoadRecipeCreator(null, null);
             LoadCurrentRecipes(null, null);
+        }
+
+        private void DeleteBook(object sender, EventArgs e)
+        {
+            BookButton senderBtn = (BookButton) sender;
+            string msg = $"Are you sure you want to delete {senderBtn.Content} and all its recipes";
+            MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes) {
+                Controller.GetInstance().DeleteBook(senderBtn.ID);
+                this.LoadBooks(sender, e);
+                this.ShowCreateBook(sender, e);
+            }
         }
 
         private void Navigate(Page target) {
