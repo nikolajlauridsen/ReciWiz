@@ -71,10 +71,10 @@ namespace ReciWizGUI
                 RecipePanel.Children.Add(button);
             }
 
-            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator, DeleteRecipe);
+            RecipeButton newButton = new RecipeButton(0, "New recipe", ShowRecipeCreator, DeleteRecipe);
             RecipePanel.Children.Add(newButton);
 
-            LoadRecipeCreator(null, null);
+            ShowRecipeCreator(null, null);
         }
 
         private void LoadCurrentRecipes(object sender, EventArgs e)
@@ -85,11 +85,11 @@ namespace ReciWizGUI
                 RecipePanel.Children.Add(button);
             }
 
-            RecipeButton newButton = new RecipeButton(0, "New recipe", LoadRecipeCreator, DeleteRecipe);
+            RecipeButton newButton = new RecipeButton(0, "New recipe", ShowRecipeCreator, DeleteRecipe);
             RecipePanel.Children.Add(newButton);
         }
 
-        private void LoadRecipeCreator(object sender, EventArgs e)
+        private void ShowRecipeCreator(object sender, EventArgs e)
         {
             CreateRecipe recipeCreator = new CreateRecipe(_chosenBook, LoadCurrentRecipes);
             Navigate(recipeCreator);
@@ -109,7 +109,7 @@ namespace ReciWizGUI
             MessageBoxResult messageBoxResult = MessageBox.Show(msg, "Delete Confirmation", MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes) {
                 _controller.DeleteRecipe(_chosenBook, btn.ID);
-                LoadRecipeCreator(null, null);
+                ShowRecipeCreator(null, null);
                 LoadCurrentRecipes(null, null);
             }
             
