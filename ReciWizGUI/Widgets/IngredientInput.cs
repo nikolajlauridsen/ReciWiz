@@ -16,13 +16,13 @@ namespace ReciWizGUI.Widgets
         public Dictionary<string, TextBox> ingredient = new Dictionary<string, TextBox>();
         private string[] Clearable = { "Quantity", "Unit", "Name" };
 
-        public IngredientInput()
+        public IngredientInput(string name, string quantity, string unit)
         {
             this.Margin = new Thickness(0, 0, 0, 10);
 
-            ingredient["quantity"] = new TextBox { Text = "Quantity" };
-            ingredient["unit"] = new TextBox { Text = "Unit" };
-            ingredient["name"] = new TextBox { Text = "Name" };
+            ingredient["quantity"] = new TextBox { Text = quantity };
+            ingredient["unit"] = new TextBox { Text = unit };
+            ingredient["name"] = new TextBox { Text = name };
             
 
             foreach (TextBox box in ingredient.Values) {
@@ -31,6 +31,11 @@ namespace ReciWizGUI.Widgets
                 this.Children.Add(box);
                 box.GotFocus += ClearText;
             }
+        }
+
+        public IngredientInput() : this("Name", "Quantity", "Unit")
+        {
+
         }
 
         public IingredientLine GetIngredientLine()

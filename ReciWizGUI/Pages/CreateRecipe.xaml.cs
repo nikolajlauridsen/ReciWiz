@@ -37,7 +37,13 @@ namespace ReciWizGUI.Pages
 
             createBtn.Click += createRecipe;
             createBtn.Click += listener;
-            this.KeyDown += OnKey;
+            this.KeyDown += (sender, keyEvent) => {
+                if (keyEvent.Key == Key.Enter && !RecipeName.IsFocused) {
+                    IngredientInput input = new IngredientInput();
+                    IngredientContainer.Children.Add(input);
+                    input.Select();
+                }
+            };
         }
 
         private void IngredientAdd(object sender, EventArgs e)
@@ -59,15 +65,6 @@ namespace ReciWizGUI.Pages
                 );
 
             Controller.GetInstance().CreateRecipe(_bookId, RecipeName.Text, ingredients, instructions.Text);
-        }
-
-        private void OnKey(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter && !RecipeName.IsFocused) {
-                IngredientInput input = new IngredientInput();
-                IngredientContainer.Children.Add(input);
-                input.Select();
-            }
         }
 
     }

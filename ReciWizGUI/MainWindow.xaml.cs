@@ -67,11 +67,11 @@ namespace ReciWizGUI
             _chosenBook = senderButton.ID;
             // Implement getRecipes and change books to that
             foreach(IRecipe recipe in _controller.GetRecipies(senderButton.ID)) {
-                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe);
+                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe, LoadEditRecipe);
                 RecipePanel.Children.Add(button);
             }
 
-            RecipeButton newButton = new RecipeButton(0, "New recipe", ShowRecipeCreator, DeleteRecipe);
+            RecipeButton newButton = new RecipeButton(0, "New recipe", ShowRecipeCreator, DeleteRecipe, LoadEditRecipe);
             RecipePanel.Children.Add(newButton);
 
             ShowRecipeCreator(null, null);
@@ -81,11 +81,11 @@ namespace ReciWizGUI
         {
             RecipePanel.Children.Clear();
             foreach (IRecipe recipe in _controller.GetRecipies(_chosenBook)) {
-                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe);
+                Button button = new RecipeButton(recipe.ID, recipe.Title, LoadRecipe, DeleteRecipe, LoadEditRecipe);
                 RecipePanel.Children.Add(button);
             }
 
-            RecipeButton newButton = new RecipeButton(0, "New recipe", ShowRecipeCreator, DeleteRecipe);
+            RecipeButton newButton = new RecipeButton(0, "New recipe", ShowRecipeCreator, DeleteRecipe, LoadEditRecipe);
             RecipePanel.Children.Add(newButton);
         }
 
@@ -113,6 +113,13 @@ namespace ReciWizGUI
                 LoadCurrentRecipes(null, null);
             }
             
+        }
+
+        private void LoadEditRecipe(object sender, EventArgs e)
+        {
+            RecipeButton btn = (RecipeButton) sender;
+            RecipeEditor editor = new RecipeEditor(_chosenBook, Controller.GetInstance().GetRecipe(_chosenBook, btn.ID));
+            Navigate(editor);
         }
 
         private void DeleteBook(object sender, EventArgs e)
