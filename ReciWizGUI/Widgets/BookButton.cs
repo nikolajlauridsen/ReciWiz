@@ -27,14 +27,9 @@ namespace ReciWizGUI
 
             ContextMenu menu = new ContextMenu();
             MenuItem deleteOption = new MenuItem {Header = "Delete"};
-            deleteOption.Click += DeleteClick;
+            deleteOption.Click += (sender, e) => _deleteClick(this, e);
             menu.Items.Add(deleteOption);
             this.ContextMenu = menu;
-        }
-
-        private void DeleteClick(object sender, RoutedEventArgs e)
-        {
-            _deleteClick(this, e);
         }
     }
 }

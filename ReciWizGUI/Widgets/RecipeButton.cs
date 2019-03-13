@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,26 +29,16 @@ namespace ReciWizGUI
             MenuItem editOption = new MenuItem() {
                 Header = "Edit"
             };
-            editOption.Click += EditSelf;
+            editOption.Click += (sender, e) => _editHandler(this, e);
             menu.Items.Add(editOption);
 
             MenuItem deleteOption = new MenuItem {
                 Header = "Delete"
             };
-            deleteOption.Click += DeleteSelf;
+            deleteOption.Click += (sender, e) => _deleteHandler(this, e);
             menu.Items.Add(deleteOption);
 
             this.ContextMenu = menu;
-        }
-
-        private void DeleteSelf(object sender, RoutedEventArgs e)
-        {
-            _deleteHandler(this, e);
-        }
-
-        private void EditSelf(object sender, RoutedEventArgs e)
-        {
-            _editHandler(this, e);
         }
     }
 }
