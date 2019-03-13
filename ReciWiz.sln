@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciWiz", "ReciWiz\ReciWiz.csproj", "{6ED813D7-27BA-44F0-A5AA-01A83A6264B1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReciTest", "ReciTest\ReciTest.csproj", "{0434134A-8810-413C-ACA3-CDE1369C8D40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeLib", "RecipeLib\RecipeLib.csproj", "{4841AAEE-86EA-4E1C-8B4C-EC8821097364}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6ED813D7-27BA-44F0-A5AA-01A83A6264B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6ED813D7-27BA-44F0-A5AA-01A83A6264B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6ED813D7-27BA-44F0-A5AA-01A83A6264B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6ED813D7-27BA-44F0-A5AA-01A83A6264B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0434134A-8810-413C-ACA3-CDE1369C8D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
